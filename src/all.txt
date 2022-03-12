@@ -1,0 +1,576 @@
+##Infra should be defined##########
+
+Product0=Infra
+InfraNTPServer=172.16.11.10
+InfraDNSServer=172.16.11.11
+InfraDomain=nfvra1.com
+
+##-----Option available "N" or "Y"  In case of N, will migrate the ESXI management network from standard(VSS) to dvSwitch--------
+Esxi_Mgmt_Network_Managed_by_VSS=N
+##-----Option available "N" or "Y"  In case of Y, it will deploy and configure VIO
+VIODeployment=N
+##-----Option available "3.0,3.1,3.2,3.3,TCI1.0"
+NFVStack=TCI1.0
+
+###############Infrastructure###############
+#LicenseKeyESXi =R549P-JY2EH-98780-0K9R2-3WN1K
+MgmtHostIp1=172.16.10.12		
+MgmtHostIp2=172.16.10.11
+MgmtHostIp3=172.16.10.14
+ResHostIp1=172.16.10.15
+ResHostIp2=172.16.10.16	
+ResHostIp3=172.16.10.17	
+
+#EdgeHostIp1=
+#EdgeHostIp2=
+#EdgeHostIp3=
+
+MgmtHostUser=root				
+MgmtHostPassword=ca$hc0w
+ResHostUser=root
+ResHostPassword=ca$hc0w
+#EdgeHostUser=
+#EdgeHostPassword=
+
+#NFSIp=x.x.x.x
+#NFSMountPoint=/<mount-point>/<local-folder>			
+#NFSName=NFS
+##-----Option available "y" or "n"--------
+AllFlashvSAN=y
+##-----Option available "vSAN" or "NFS" or "Local"--------
+MgmtDatastoreType=vSAN
+ResDatastoreType=vSAN
+#EdgeDatastoreType=
+##-------Option available "2POD" or "3POD"-----------
+PODDesign=2POD
+
+############ Product1 = Management VC deployment ################
+
+vCenterBinaryPath=E:\\RAID-tci10ose\\Builds\\VMware-VCSA-all-6.7.0-16708996.iso		
+MgmtVCDeploymentOption=small
+MgmtVCApplianceName=nfv-mgmt-vcenter
+
+##-------Management vCenter FQDN-----------
+
+MgmtVCHostname=nfv-mgmt-vcenter.nfvra1.com
+MgmtVCName=nfv-mgmt-vcenter
+MgmtVCGateway=172.16.10.253
+MgmtVCSubnetMask=255.255.255.0
+MgmtVCIpAddress=172.16.10.25
+MgmtVCIpFamily=IPv4
+MgmtVCNetworkMode=static
+MgmtVCNetworkPrefix=24
+MgmtVCRootPassword=VMware1!
+MgmtVCSSOPassword=VMware1!
+MgmtVCSSODomain=vsphere.local
+MgmtVCUserName=administrator@vsphere.local
+
+## Existing standard switch name where vCenter needs to get deployed
+MgmtVCDeploymentNetworkSwitch=vSwitch0
+
+##########ExtraConfig###############
+MGMTSubNet=172.16.10.0
+
+
+########### Product2 = Resource VC deployment #############
+
+ResourceVCDeploymentOption=small
+ResourceVCApplianceName=fist4-res-vcenter
+ResourceVCHostname=fist4-res-vcenter.nfvra1.com
+ResVCName=fist4-res-vcenter
+ResourceVCGateway=172.16.10.253
+ResourceVCIpAddress=172.16.10.26
+ResourceVCIpFamily=IPv4
+ResourceVCNetworkMode=static
+ResourceVCNetworkPrefix=24
+ResourceVCRootPassword=VMware1!
+ResourceVCSSOPassword=VMware1!
+ResourceVCSSODomain=vsphere.local
+ResourceVCUserName=administrator@vsphere.local
+
+########### Management VC configuration ###########
+MgmtDCName=nfv_mgmt_dc
+MgmtClusterName=nfv_mgmt_cluster
+InfraDvSwitch=nfv_mgmt_infra_vds
+TenantDvSwitch=nfv_mgmt_tenant_vds
+MgmtvSANDatastoreName=nfv_mgmt_vsan_ds
+
+## Number of uplink ports to assign for the management cluster ##
+## NOTE: This setting will be ignored if specific vmnics are assigned as shown below ##
+
+MgmtInfraNumuplinkports=2
+MgmtTenantNumuplinkports=2
+
+## NOTE: If the settings below are blank, the script looks for available 10G ports and ## 
+## assigns them in the order that they are found ##
+## Management Host1 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+MgmtHostTenantNic1=
+MgmtHostInfraNic1=
+## Management Host2 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+MgmtHostTenantNic2=
+MgmtHostInfraNic2=
+## Management Host3 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+MgmtHostTenantNic3=
+MgmtHostInfraNic3=
+## Management Host4 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+MgmtHostTenantNic4=
+MgmtHostInfraNic4=
+
+## Management VDS port group name and VLAN ID ##
+
+MgmtPGvMotion=nfv_pg_mgmt_vmotion
+MgmtPGvMotionVLANID=3100
+MgmtPGESXi=nfv_pg_mgmt_esxi
+MgmtPGESXiVLANID=3410
+#MgmtPGInfraBackup=
+#MgmtPGInfraBackupVLANID=
+#MgmtPGReplication=
+#MgmtPGReplicationVLANID=
+MgmtPGvSAN=nfv_pg_mgmt_vsan
+MgmtPGvSANVLANID=3411
+MgmtPGVMMgmt=nfv_pg_mgmt_vm
+MgmtPGVMMgmtVLANID=3410
+MgmtPGVCHA=nfv_pg_vcha
+MgmtPGVCHAVLANID=3412
+#VIOAPI=
+#VIOAPIVLANID=
+#MgmtPGTenantBackup=
+#MgmtPGTenantBackupVLANID=
+MgmtPGExternal=nfv_pg_mgmt_external
+MgmtPGExternalVLANID=3417
+#PGNFSVLANID= 
+
+## Management cluster VCHA related ####
+
+MgmtVCHAIp=172.16.12.61
+MgmtVCHAPrefix = 24
+MgmtVCHAPassiveIp=172.16.12.62
+MgmtVCHAPassiveVmName=nfv-mgmt-vcha-passive
+MgmtVCHAWitnessIp=172.16.12.63
+MgmtVCHAWitnessVmName=nfv-mgmt-vcha-witness
+MgmtVCHAsubnetMask=255.255.255.0
+
+###########Resource vCenter Configuration###########
+
+ResDCName=nfv_res_dc
+ResClusterName=nfv_res_cluster
+ResInfraDvSwitch=nfv_res_infra_vds
+ResTenantDvSwitch=nfv_res_tenant_vds
+ResvSANDatastoreName=nfv_res_vsan_dds
+
+### Resource VDS port group name and VLAN ID ##
+
+ResPGvMotion=nfv_pg_res_vmotion
+ResPGvMotionVLANID=3100
+ResPGESXi=nfv_pg_res_esxi
+ResPGESXiVLANID=3410
+ResPGvSAN=nfv_pg_res_vsan
+ResPGvSANVLANID=3411
+ResPGVMMgmt=nfv_pg_res_vm
+ResPGVMMgmtVLANID=3410
+ResPGOverlay=nfv_pg_res_overlay
+ResPGExternal=nfv_pg_res_external
+ResPGNFS=nfv_pg_res_nfs
+
+## Number of uplink ports to assign for resource cluster ##
+## NOTE: This setting will be ignored if specific vmnics are assigned as shown below ##
+ResInfraNumuplinkports=2
+ResTenantNumuplinkports=2
+
+## NOTE: If the settings below are blank, the script looks for available 10G ports and  
+## assigns them in the order that they are found 
+## Resource Host1 Infra and Tenant Nics to assign. Enter comma separated for multiple nics 
+ResHostTenantNic1=
+ResHostInfraNic1=
+## Resource Host2 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+ResHostTenantNic2=
+ResHostInfraNic2=
+## Resource Host3 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+ResHostTenantNic3=
+ResHostInfraNic3=
+## Resource Host4 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+ResHostTenantNic4=
+ResHostInfraNic4=
+
+#### Resource cluster VCHA related ####
+
+ResVCHAIp=172.16.12.71
+ResVCHAPrefix=24
+ResVCHAPassiveIp=172.16.12.72
+ResVCHAPassiveVmName=fist4-res-vcha-passive
+ResVCHAWitnessIp=172.16.12.73
+ResVCHAWitnessVmName=fist4-res-vcha-witness
+ResVCHAsubnetMask=255.255.255.0
+
+
+############ Edge cluster configuration ###################
+EdgeClusterName=
+EdgeInfraDvSwitch=
+EdgeTenantDvSwitch=
+
+## Number of uplink ports to assign for the Edge cluster ##
+## NOTE: This setting will be ignored if specific vmnics are assigned as shown below ##
+EdgeTenantNumuplinkports=
+EdgeInfraNumuplinkports=
+
+## NOTE: If the settings below are blank, the script looks for available 10G ports and ## 
+## assigns them in the order that they are found ##
+## Edge Host1 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+EdgeHostTenantNic1=
+EdgeHostInfraNic1=
+
+##-------Edge Host-2 Infra and Tenant Nics to add-------------
+##-------If multiple nics needed to be attached enter by comma separated like vmnic0,vmnic1
+## Edge Host2 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+EdgeHostTenantNic2=
+EdgeHostInfraNic2=
+
+##-------Edge Host-3 Infra and Tenant Nics to add-------------
+##-------If multiple nics needed to be attached enter by comma separated like vmnic0,vmnic1
+## Edge Host3 Infra and Tenant Nics to assign. Enter comma separated for multiple nics ###
+EdgeHostTenantNic3=
+EdgeHostInfraNic3=
+
+#EdgePGvMotion
+#EdgePGvMotionVLANID=
+#EdgePGESXi=
+#EdgePGESXiVLANID=
+#EdgePGvSAN=
+#EdgePGvSANVLANID=
+#EdgePGVMMgmt=
+#EdgePGVMMgmtVLANID=
+#EdgePGNFS=
+
+ESXiVMKernelMtu=1500
+
+## Hosts vMotion IP and Mask ##
+MgmtHostVmotionIp1=192.168.100.167
+MgmtHostVmotionIp2=192.168.100.166
+MgmtHostVmotionIp3=192.168.100.169
+#EdgeHostVmotionIp1=
+#EdgeHostVmotionIp2=
+#EdgeHostVmotionIp3=
+ResHostVmotionIp1=192.168.100.170
+ResHostVmotionIp2=192.168.100.171
+ResHostVmotionIp3=192.168.100.172
+
+
+VMHostvMotionMask=255.255.252.0
+#EdgeVMHostvMotionMask=
+ResVMHostvMotionMask=255.255.252.0
+
+## Host vSAN IP and Mask ##
+MgmtHostVSANIp1=172.16.11.12
+MgmtHostVSANIp2=172.16.11.13
+MgmtHostVSANIp3=172.16.11.14
+#EdgeHostVSANIp1=
+#EdgeHostVSANIp2=
+#EdgeHostVSANIp3=
+ResHostVSANIp1=172.16.11.15
+ResHostVSANIp2=172.16.11.16
+ResHostVSANIp3=172.16.11.17
+
+
+VMHostvSANMask=255.255.255.0
+#EdgeVMHostvSANMask=
+ResVMHostvSANMask=255.255.255.0
+
+## Hosts NFS IP and Mask ##
+MgmtHostNFSIp1=192.168.104.167
+MgmtHostNFSIp2=192.168.104.166
+MgmtHostNFSIp3=192.168.104.169
+#EdgeHostNFSIp1=
+#EdgeHostNFSIp2=
+#EdgeHostNFSIp3=
+ResHostNFSIp1=192.168.104.170
+ResHostNFSIp2=192.168.104.171
+ResHostNFSIp3=192.168.104.172
+
+## Required for the 1st Management Host ##
+SwitchNameForNFSVmKernel=vSwitch0
+NFSVmKernelSubnet=255.255.252.0
+
+
+############### NSX-T Manager Deployment ############
+NsxTMGROVAPath=E:\\RAID-tci10ose\\Builds\\nsx-unified-appliance-3.0.2.0.0.16887203.ova
+NsxTMGRVMName=fist4-nsxt-manager
+NsxTRootPassword=VMware1!VMware1!
+NsxTCliPassword=VMware1!VMware1!
+NsxTAdminPassword=VMware1!VMware1!
+NsxTAuditPassword=VMware1!VMware1!
+NsxTAdminUserName=admin
+NsxTAuditUserName=audit
+NsxTMGRHostName=fist4-nsxt-manager.nfvra1.com
+
+NsxTMGRIpAddress=172.16.10.27
+NsxTNetMask=255.255.255.0
+NsxTGateWay=172.16.10.253
+NsxTPrefix=24
+NsxTMGRDepSize=small
+NsxTIpType=IPv4
+NsxTLicense=F0635-NL6EH-X8UDH-01P8H-ADLK0   
+##M14LJ-8GJ11-381CJ-0L306-9WFN3
+NsxTMGRVIp=172.16.10.30
+NSXTemailid=admin@nfvra1.com
+
+
+## NSX-T - specific to 2.5 ##
+#NsxTMGRRole=NSX Manager
+
+## NSX-T - specific to 2.4 ##
+#NsxTMGRRole=nsx-manager nsx-controller
+
+## NSX-T - 2.4 and above ##
+############### NSX-T Secondary Nodes Deployment ############
+NsxTNode01IpAddress=172.16.10.28
+NsxTNode02IpAddress=172.16.10.29
+NsxTMGRFormFactor=SMALL
+NsxTLoadBalancerSize=SMALL
+
+# NSX-T 2.3 or earlier
+#NsxTMGRRole=nsx-manager
+NsxTCtrlNodeDepSize=MEDIUM
+NsxTCtrlNode01HostName=fist4-nsxt-node1.nfvra1.com     
+#lax01m01nsxtc01a.nfvraid.com
+NsxTCtrlNode01VMName=fist4-nsxt-node1       
+#lax01m01nsxtc01a
+NsxTCtrlNode01IpAddress=172.16.10.28    
+#172.16.11.15
+NsxTCtrlNode02HostName=fist4-nsxt-node2.nfvra1.com       
+#lax01m01nsxt01b.nfvraid.com
+NsxTCtrlNode02IpAddress=172.16.10.29        
+#172.16.11.16
+NsxTCtrlNode02VMName=fist4-nsxt-node2       
+#lax01m01nsxtc01b
+#NsxTCtrlNode03HostName=fist4-nsxt-node2        
+#lax01m01nsxtc01c.nfvraid.com
+#NsxTCtrlNode03IpAddress=172.16.11.17
+#NsxTCtrlNode03VMName=lax01m01nsxtc01c
+NsxCtrlPassword=VMware1!VMware1!
+
+#############NSXT Edge Deployment ######################
+NsxTEdgeNodeIp1=172.16.10.31
+NsxTEdgeNodeIp2=172.16.10.32
+EdgeCLIPassword=Admin!23Admin
+EdgeRootPassword=Admin!23Admin
+EdgeDeploymentSize=MEDIUM
+
+
+
+
+#############NSXT IP Pool Creation#######################
+NsxTIPPoolStartAddress=172.16.16.40
+NsxTIPPoolEndAddress=172.16.16.60
+NsxTIPPoolCIDR=172.16.16.0/24
+
+#############NSXT-Overlay-Transport-Zone################
+Overlay_Transport_Zone_display_name=fist4-r-std-overlay
+Overlay_Transport_Zone_host_switch_name=fist4-r-overlay-hostswitch
+Overlay_Transport_Zone_description=fist4-r-overlay-hostswitch
+Overlay_Transport_type=OVERLAY
+
+#############NSXT-VLAN-Transport-Zone##############
+VLAN_Transport_Zone_display_name=fist4-r-std-vlan
+VLAN_Transport_Zone_host_switch_name=fist4-r-vlan-hostswitch
+VLAN_Transport_Zone_description=fist4-r-vlan-hostswitch
+VLAN_Transport_type=VLAN
+
+
+
+
+############# vRealize LogInsight deployment #############
+LogInsightNodeOVAPath=E:\\RAID-tci10ose\\Builds\\VMware-vRealize-Log-Insight-8.1.1.0-16281169_OVF10.ova
+LogInsightMNodeIpAddress=172.16.10.60
+LogInsightMNodeVMName=fist4-vrli-master
+LogInsightMNodeDomainName=fist4-vrli-master.nfvra1.com
+LogInsightNodeNetMask=255.255.255.0
+LogInsightNodeGateWay==172.16.10.253
+LogInsightNodeDeploymentOption=small
+LogInsightNodeIpType=IPv4
+LogInsightNodeRootPassword=VMware1!
+
+
+####LogInsight worker node####
+LogInsightWNodeIpAddress1=172.16.10.61
+LogInsightWNodeVMName1=fist4-vrli-worker-1
+LogInsightWNodeDomainName1=fist4-vrli-worker-1.nfvra1.com
+LogInsightWNodeIpAddress2=172.16.10.62
+LogInsightWNodeVMName2=fist4-vrli-worker-2.nfvra1.com
+LogInsightWNodeDomainName2=fist4-vrli-worker-2
+
+####### vRealize LogInsight Configuration #######
+LogInsightLicense=0N2TK-DEK5H-H8CW3-090K2-2X4JP
+LogInsightUserName=admin
+LogInsightemailid=admin@nfvra1.com
+LogInsightVIPAddress=172.16.10.63
+LogInsightVIPFQDN=fist4-vrli-vip.nfvra1.com
+ContentPackLocation=E:\\RAID-tci10ose\\Builds\\
+
+############### vRealize Operation Manager deployment #################
+vRopsOVAPath=E:\\RAID-tci10ose\\Builds\\vRealize-Operations-Manager-Appliance-8.1.1.16522874_OVF10.ova
+vRopsMasterNodeVMName=fist4-vrops-master
+vRopsReplicaNodeVMName=fist4-vrops-replica
+vRopsDataNodeVMName=fist4-vrops-data
+
+vRopsMasterDeploymentSize=xsmall
+vRopsMasterNodeIp=172.16.10.64
+vRopsReplicaNodeIp=172.16.10.65
+vRopsDataNodeIp1=172.16.10.66
+#vRopsDataNodeIp2=
+#vRopsDataNodeIp3=
+vRopsNodeGateway=172.16.10.253
+vRopsNodeNetmask=255.255.255.0
+
+vRopsNodeIpType=IPv4
+vRopsNodeTime=Etc/UTC
+vRopsNodeAdminPassword=VMware1!
+
+
+######vROPS config#########
+vRopsNodeUserName=admin
+vRopsLicenseKey=R5O9Z-J0E1L-J8881-OQZAK-24A4Z
+
+
+############# VMware Integrated OpenStack configuration ##################
+VIOOVAPath=E:\\VIO-Appliance-7.0.0.0-16227912_OVF10.ova
+VIODomainName=megafon-poc.local
+VIOManagementIp=192.168.121.16
+VIONetmask=255.255.255.0
+VIOGateway=192.168.121.1
+VIOIpAllocationPolicy=fixedPolicy
+VIOUserPassword=VMware1!
+OVFToolPath=C:\\Program Files\\VMware\\VMware OVF Tool\\ovftool.exe
+VIOVMName=VIOMGMT
+VIOUserName=viouser
+VIOMgmtNetworkNetMask=255.255.255.0
+VIOMgmtNetworkGateway=192.168.121.1
+VIOMgmtNetworkStartIP=192.168.121.25
+VIOMgmtNetworkEndIP=192.168.121.42
+#####Specific to VIO 6.0 Deployment##########################
+PrivateOpenstackEndpoint=172.16.21.162
+
+#####Specific to VIO 6.0 Deployment##########################
+VIORootPassword=VMware1!
+VIOServiceCIDR=201.16.0.0/12
+VIOPODCIDR=202.168.0.0/16
+VIOServiceDomain=cluster.megafon
+##Path where the Chromedriver is located
+ChromeDriverPath=F:\\nfv3.2build\\powercliuiautomation\\
+WebdriverPath=F:\\nfv3.2build\\powercliuiautomation\\WebDriver.dll
+ResourcePoolName=VIO
+
+
+VIOAPINetworkNetmask=255.255.255.0
+VIOAPINetworkGateway=192.168.122.1
+VIOAPINetworkStartIP=192.168.122.10
+VIOAPINetworkEndIP=192.168.122.15
+#####Specific to VIO 6.0 Deployment##########################
+PublicOpenstackEndpoint=172.16.25.16
+
+VIOPublicIP=192.168.122.10
+VIOAdminPassword=VMware1!
+
+
+############# VCD Deployment Configuration ##################
+
+
+### VCD - specific to 3.3 VCD appliance deployment #####
+ExternalNetworkGateway=172.16.17.253
+ExternalNetworkPrefixLength=24
+ExternalNetworkStartAddress=172.16.17.140
+ExternalNetworkEndAddress=172.16.17.160                
+
+
+### VCD - specific to 3.2 VCD appliance deployment #####
+VCDCellPrimaryeth0Ip=172.16.16.253
+VCDCellPrimaryeth1Ip=172.16.21.92
+VcdcellPrimaryFqdn=vcd-cell-primary
+VCDCellStandby1eth0Ip=172.16.21.93
+VCDCellStandby1eth1Ip=172.16.21.94
+VCDCellStandby2eth0Ip=172.16.21.95
+VCDCellStandby2eth1Ip=172.16.21.96
+VcdcellStandbySysName=vcd-cell-standby
+
+#### VCD - specific to 3.0 appliance deployment #####
+#VCDDBIp = 172.16.11.49
+#VCDDBName=vcloud
+#VCDDBUser=vcloud
+#VCDDBType=mssql
+#VCDNumCell=3
+#VCDCellIp1=172.16.21.92
+#VCDCellIp2=172.16.21.93
+#VCDCellIp3=172.16.21.94
+
+######### VCD - common to all releases ########
+VCDVMName=fist4-vcd
+vCDOVAPath=E:\\RAID-tci10ose\Builds\\VMware_Cloud_Director-10.1.2.5062-16779634_OVF10.ova
+VCDVIP=172.16.21.97
+VCDVIPPrefix=24
+VCDNetMask=255.255.255.0
+VCDGateway=172.16.21.1
+VCDGuestUser=root
+vCDTRootPassword = VMware1!
+VCDNFSServerIp=172.16.21.6
+VCDNFSShare=172.16.21.6:/home/nfsshare
+VCDIpAllocationPolicy = fixedPolicy
+VCDIpProtocol=IPv4
+VCDDBPassword=vcloudpass
+VCDAdminUserName=administrator
+VCDAdminFullname=vCD Admin
+VCDAdminPassword=VMware1!
+VCDAdminEmail=admin@nfvraid.com
+VCDSysName=vcd1
+VCDInstallID=1
+
+
+####### NSX-V Manager Deployment Input #######
+NsxVMGROVAPath=
+NsxVMGRVMName=
+NsxVAdminUserName=
+NsxVRootPassword=
+NsxVAdminPassword=
+NsxVMGRHostName=
+NsxVMGRIpAddress=
+NsxVNetMask=
+NsxVGateWay=
+NsxVLicence=
+
+
+###### NSX-V Configuration Input #########
+ControllerIpPoolName=
+NsxVPrefix=24
+NsxVIpPoolStartAddress=
+NsxVIpPoolEndAddress=
+NsxVControllerPassword=
+NSX_VXLAN_Ip_Pool_Name=
+NSX_VXLAN_Ip_Pool_Gateway=
+NSX_VXLAN_Ip_Pool_Prefix=24
+NSX_VXLAN_Ip_Pool_Start=
+NSX_VXLAN_Ip_Pool_End=
+NSX_VXLAN_VTEP_Count=
+NSX_VXLAN_VLANID=
+NSX_VXLAN_TZ_Name=
+NSX_VXLAN_TZ_Mode=
+NSX_VXLAN_Segment_ID_Begin=
+NSX_VXLAN_Segment_ID_End=
+NSX_VXLAN_Failover_Mode=
+NSX_VXLAN_MTU_Size=
+
+
+
+
+#### PXE #######
+PXEServerUser=vmware
+PXEServerPassword=VMware1!
+PXEServerIP1=10.175.48.166
+PXEServerIP2=10.175.48.167
+PXEServerIP3=10.175.48.169
+PXEServerIP4=10.175.48.170
+PXEServerIP5=10.175.48.171
+PXEServerIP6=10.175.48.172
+
+HardwareVendor=DELL
+PXEbootServerCount=6
+RacadmPath=C:\\Program Files\\Dell\\SysMgt\\rac5\\racadm.exe
+
+

@@ -1,0 +1,44 @@
+.header {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    padding: 0 10%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #012c55;
+    position: sticky;
+    top:0%;
+    
+
+  }
+  
+  .logo {
+    color: red !important;
+    font-style: italic !important;
+    font-family: cursive !important;
+    font-size: xx-large !important ;
+  }
+  
+  .nav  {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navlink{
+    margin-left: 1.5rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: #88dfdf;
+  }
+
+  .activelink{
+
+    margin-left: 1.5rem;
+    font-size: 1.25rem;
+    color:gold;
+  }
+
+
+  
