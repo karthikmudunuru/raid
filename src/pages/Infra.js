@@ -3,12 +3,12 @@ import { useForm,FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
 import MyFieldArray  from '../components/MyFieldArray';
 import MyDropdown from '../components/MyDropdown';
-import NumberField from '../components/NumberField';
 import Password from '../components/Password';
 import { useDispatch } from 'react-redux';
 import { infraActions } from '../store/infra';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { myTextAreaStyle,submitStyle,migration_options,pod_options,data_options,vsan_options } from '../store/constants';
 
 const ipv4format = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 const schema = yup.object({
@@ -39,45 +39,9 @@ const schema = yup.object({
 
 var infra_map = new Map()
 
-const myTextAreaStyle= {
-    height: '100%', 
-    width:'100%', 
-    margin: '2em',
-    padding: '2em',
-    backgroundColor: 'ivory', 
-    fontWeight :'bold', 
-    fontSize:'larger' ,
-    padding:'1em',
-    borderStyle: 'solid',
-    borderColor: 'green'
-};
 
 
-const migration_options=
-[ 
-    {value : "N" ,text: "Yes"},  
-    {value : "Y" ,text: "No"}
-] ;
 
-const pod_options=
-[ 
-    {value : "2POD" ,text: "Two Pods"},  
-    {value : "3POD" ,text: "Three Pods"}
-] ;
-
-const data_options =
-[ 
-    {value : "vSAN" ,text: "vSAN"},  
-    {value : "NFS" ,text: "NFS"},
-    {value : "Local" ,text: "Local"},
-
-] ;
-
-const vsan_options = 
-[ 
-    {value : "y" ,text: "Yes"},  
-    {value : "n" ,text: "No"}
-] ;
 
 const Infra= () => {
 
@@ -198,7 +162,7 @@ const Infra= () => {
     return (
 
      <div style={myTextAreaStyle}>
-    <FormProvider {...methods}>
+     <FormProvider {...methods}>
      <form onSubmit={methods.handleSubmit(onSubmit)}>
 
         <MyTextField label="DNS Server" id="infra_dns"  />
@@ -230,7 +194,7 @@ const Infra= () => {
         <MyTextField label="NFS Mount Point" id="infra_nfs_mountpoint" />
         <MyTextField label="NFS Name" id="infra_nfs_name" />
 
-        <input type="submit"/>
+        <input type="submit"  style={submitStyle} />
 
        
   </form>

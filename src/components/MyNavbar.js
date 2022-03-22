@@ -24,12 +24,14 @@ return (
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tkg">TKG</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tca">TCA</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/download">Download</NavLink>
-          
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vrli">vRLI</NavLink>
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vro">vRO</NavLink>
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vio">vIO</NavLink>
         </nav>
         </Nav>
       </Navbar.Collapse>
     </Container>
-  </Navbar>
+  </Navbar> 
 </header>
 
 );

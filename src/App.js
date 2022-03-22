@@ -36,6 +36,12 @@ const App= () => {
           <Route path="/tca" element={ <Tca/>} />
 
           <Route path="/download" element={ <Download/>} />
+
+          <Route path="/vrli" element={ <Vrli/>} />
+
+          <Route path="vro" element={ <Vro/>} />
+
+          <Route path="/vio" element={ <Vio/>} />
            
          
       </Routes>
