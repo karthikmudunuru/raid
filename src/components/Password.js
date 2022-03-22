@@ -1,45 +1,67 @@
-import React, {useImperativeHandle} from 'react';
-import useInput from '../hooks/use-input';
+import React, {useState} from 'react';
+import { useFormContext, Controller } from "react-hook-form";
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 
 
+
+const Password = ({id, label}) =>{ 
+  
+  const { control,  formState :{errors}} = useFormContext();
+  const [showPassword ,setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(prevstate => !prevstate);
+  }
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
  
-const isNotEmpty = (value) => value.trim() !== '';
 
-const Password=  React.forwardRef((props, ref) =>{
-    const { value, isValid, hasError, valueChangeHandler, inputBlurHandler, reset} = useInput(isNotEmpty);
-    
-    useImperativeHandle(ref, () => {
-      return {
-        value:value,
-        isValid:isValid,
-        hasError:hasError,
-        valueChangeHandler:valueChangeHandler,
-        inputBlurHandler:inputBlurHandler,
-        reset:reset
-      };
-    });
-    const inputClasses = hasError ? 'my-form-control invalid' : 'my-form-control';
-    
-    if (isValid){
-      props.getValue({'id':props.id, 'value':value})
-    }
 return (
     
-    <div className='my-control-group'>
-        <div className={inputClasses}>
-          <label htmlFor={props.id}>{props.label}</label>
-          <input
-            type='password'
-            id={props.id}
-            value={value}
-            onChange={valueChangeHandler}
-            onBlur={inputBlurHandler}
-          />
-          {hasError && <p className="error-text"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter a valid {props.label}</p>}
-        </div>
-    </div>
+ 
+  <div className='my-control-group'>
+    <Controller
+      name={id}
+      control={control}
+    
+      render={({ field}) => (
+
+          <TextField
+          {...field}
+            type={showPassword ? 'text' : 'password'}
+            label={label}
+            error={!!errors[id]}
+            variant="outlined" 
+            helperText={errors[id] ? errors[id]?.message : ''}
+            InputProps={{
+            endAdornment: 
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            
+            </InputAdornment>,
+          }}
+          /> 
+        
+
+        
+        )}
+    />
+  </div>
 
 );
-});
+};
 
-export default Password;
+export default Password ;

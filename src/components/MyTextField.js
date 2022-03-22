@@ -3,15 +3,13 @@ import { useFormContext, Controller } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
 
+// {errors[id] && errors[id]?.message && <span>{errors[id].message}</span>}
 
-const NumberField =  ({id, label}) =>{ 
+const MyTextField = ({id, label}) =>{ 
   const { control,  formState :{errors}} = useFormContext();
  
- 
- 
- 
 
-  return (
+return (
     
     <div className='my-control-group'>
       <Controller
@@ -23,7 +21,6 @@ const NumberField =  ({id, label}) =>{
             <TextField
              {...field}
               label={label}
-              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
               error={!!errors[id]}
               variant="outlined" 
               helperText={errors[id] ? errors[id]?.message : ''}
@@ -38,4 +35,4 @@ const NumberField =  ({id, label}) =>{
 );
 };
 
-export default NumberField;
+export default MyTextField ;

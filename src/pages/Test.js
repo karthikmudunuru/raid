@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Ipv4Field from '../components/Ipv4Field';
-import TextField from '../components/TextField';
+import TextField from '../components/MyTextField';
 import MyDropdown from '../components/MyDropdown';
 import NumberField from '../components/NumberField';
 import Password from '../components/Password';

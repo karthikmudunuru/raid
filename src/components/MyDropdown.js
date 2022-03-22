@@ -1,51 +1,38 @@
-import React, {useImperativeHandle} from 'react';
-import useInput from '../hooks/use-input';
+import React from 'react';
+import { useFormContext, Controller } from "react-hook-form";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 
+const MyDropdown = ({id, label,options}) =>{ 
+  const { control,  formState :{errors}} = useFormContext();
  
-const isNotEmpty = (value) => value.trim() !== '';
-
-const MyDropdown= React.forwardRef((props, ref) =>{
-    const {value, isValid, hasError, valueChangeHandler, inputBlurHandler, reset} = useInput(isNotEmpty);
-
-    useImperativeHandle(ref, () => {
-      return {
-        value:value,
-        isValid:isValid,
-        hasError:hasError,
-        valueChangeHandler:valueChangeHandler,
-        inputBlurHandler:inputBlurHandler,
-        reset:reset
-      };
-    });
-    
-    const inputClasses = hasError ? 'my-form-control invalid' : 'my-form-control';
-
-    const Options = props.options.map((data) => <option value={data.value} key={props.id +data.value} > {data.text}  </option>)
-    
-    if (isValid){
-        props.getValue({'id':props.id, 'value':value})
-      }
+  const menuItems =  options.map(item=> (
+    <MenuItem  key={item.value} value={item.value}>
+      {item.text}
+    </MenuItem >
+  ))
 
 return (
     
     <div className='my-control-group'>
-        <div className={inputClasses}>
-          <label htmlFor={props.id}>{props.label}</label>
-          <select 
-          id={props.id} 
-          name={props.id} 
-          value={value}
-          onChange={valueChangeHandler}
-          onBlur={inputBlurHandler}
-          >
-                    {Options}
-          </select>
-          {hasError && <p className="error-text"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please select a value</p>}
-        </div>
+        <Controller
+        name={id}
+        control={control}
+        render={({ field }) => <Select 
+          {...field}
+          label={label}
+          labelId={`${label}${id}`} 
+        
+        >
+          {menuItems}
+        </Select>
+        
+        }
+      />
     </div>
 
 );
-});
+};
 
 export default MyDropdown;
