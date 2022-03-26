@@ -37,7 +37,8 @@ const schema = yup.object({
     infra_edge_count: yup.number().default(0),
     mgmt_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
     res_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
-    edge_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}))  
+    edge_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
+    mgmt_array_0: yup.string().required().matches(ipv4format,{message : "Enter a valid IP address"}),
 
   }).required();
 

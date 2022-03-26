@@ -10,13 +10,13 @@ const MyFieldArray = ({label, count,array_name}) =>{
   const { control,  formState :{errors}, watch} = useFormContext();
  
   const { fields, append, update,replace} = useFieldArray({control,name: array_name});
-  const watchFieldArray = watch(array_name);
+  /*const watchFieldArray = watch(array_name);
   const controlledFields = fields.map((field, index) => {
     return {
       ...field,
       ...watchFieldArray[index]
     };
-  });
+  });*/
 
 
   //const watching =  useWatch({name:array_name,control})
@@ -26,12 +26,12 @@ const MyFieldArray = ({label, count,array_name}) =>{
   for(let i=0;i<count;i++){
       const element_id = array_name + "_" + i;
       const element_label = label + " " + (i+1); 
-      values.push({n:element_id,l:element_label})
+      values.push({n:element_id,l:element_label,value:''})
   }
 
   console.log("field array values is ", values);
   console.log("fields is ", fields);
-  console.log("controlled fields is", controlledFields);
+  //console.log("controlled fields is", controlledFields);
   //console.log("watching is",watching);
 
   useEffect(()=>{
@@ -67,10 +67,18 @@ const MyFieldArray = ({label, count,array_name}) =>{
               <br/>
   */
 
+    const handleChange = (index,event) =>{
+      const element_id = array_name + "_" + index;
+      const element_label = label + " " + (index+1);
+      const value= event.target.value;
+      update(index,{n:element_id,l:element_label,value:value}) 
+
+    }
+
 return (
     
     <div className='my-control-group'>
-       {controlledFields.map((item,index) => (
+       {fields.map((item,index) => (
        
         <Controller
         name={item.n}
@@ -79,7 +87,7 @@ return (
         render={({ field}) => (
             <div>
               <TextField
-               
+                {...field}
                 key={item.id}
                 label={item.l}
                 error={!!errors[array_name]?.[index]}
@@ -92,7 +100,10 @@ return (
                   borderRadius: 2,
                   minWidth: 300
                 }}
-                {...field}
+                value={field.value|| ''}
+               
+               
+                
                 /> 
              
              
