@@ -1,6 +1,7 @@
 import React, {useEffect , useState} from 'react';
-import { useForm,FormProvider  } from "react-hook-form";
+import { useForm,FormProvider,useFieldArray,Controller } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
+import NumberField from '../components/NumberField';
 import MyFieldArray  from '../components/MyFieldArray';
 import MyDropdown from '../components/MyDropdown';
 import Password from '../components/Password';
@@ -32,8 +33,11 @@ const schema = yup.object({
     infra_nfs_ip: yup.string().matches(ipv4format,{message : "Enter a valid IP address"}),
     infra_nfs_mountpoint: yup.string(),
     infra_nfs_name: yup.string(),
-    infra_res_count:yup.number().default(0),
-    infra_edge_count:yup.number().default(0)
+    infra_res_count: yup.number().default(0),
+    infra_edge_count: yup.number().default(0),
+    mgmt_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
+    res_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
+    edge_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}))  
 
   }).required();
 
@@ -74,9 +78,17 @@ const Infra= () => {
             infra_nfs_mountpoint:'',
             infra_nfs_name:'',
             infra_res_count:0,
-            infra_edge_count:0
+            infra_edge_count:0,
+            mgmt_array:[],
+            res_array:[],
+            edge_array:[]
         }
       });
+
+      //const mgmt_array_methods= useFieldArray({control, name: "mgmt_array"});
+      //const res_array_methods = useFieldArray({control, name: "res_array"});
+      //const edge_array_methods = useFieldArray({control, name: "edge_array"});
+    
     
    
  
@@ -112,8 +124,7 @@ const Infra= () => {
    
 
     useEffect(()=>{
-        //InfraDomainRef.current.setValue("nfvra1.com");
-
+        
         
       
         
@@ -161,7 +172,7 @@ const Infra= () => {
 
     return (
 
-     <div style={myTextAreaStyle}>
+   
      <FormProvider {...methods}>
      <form onSubmit={methods.handleSubmit(onSubmit)}>
 
@@ -170,18 +181,18 @@ const Infra= () => {
         <MyTextField label="Infra Domain" id="infra_domain"  />
         <MyDropdown label="Migrate Esxi Management Network from VSS to VDS" id="infra_migration" options={migration_options} />
         
-        <MyTextField  label= "Number of Management Hosts" id="infra_mgmt_count" />
-        {showmgmt && <MyFieldArray count={parseInt(mgmt_count)}  label="Management Host Ip" id="mgmt_host_ip" />}
+        <NumberField  label= "Number of Management Hosts" id="infra_mgmt_count" />
+        {showmgmt && <MyFieldArray count={parseInt(mgmt_count)}  label="Management Host Ip"   array_name="mgmt_array" />}
         <MyTextField label="Management Host User" id="mgmt_host_user" />
         <Password label="Management Host Password" id="mgmt_host_password" />
         
-        <MyTextField label= "Number of Resource Hosts" id="infra_res_count"  />
-        {showres && <MyFieldArray count={parseInt(res_count)} label="Resource Host Ip" id="res_host_ip" />}
+        <NumberField label= "Number of Resource Hosts" id="infra_res_count"  />
+        {showres && <MyFieldArray count={parseInt(res_count)} label="Resource Host Ip"  array_name="res_array"/>}
         <MyTextField label="Resource Host User" id="res_host_user" />
         <Password label="Resource Host Password" id="res_host_password" />
         
-        <MyTextField label= "Number of Edge Hosts" id="infra_edge_count"  />
-        {showedge && <MyFieldArray count={parseInt(edge_count)} label="EdgeHost Ip" id="edge_host_ip" />}
+        <NumberField label= "Number of Edge Hosts" id="infra_edge_count"  />
+        {showedge && <MyFieldArray count={parseInt(edge_count)} label="EdgeHost Ip" array_name="edge_array" />}
         <MyTextField label="Edge Host User" id="edge_host_user" />
         <Password label="Edge Host Password" id="edge_host_password" />
         
@@ -199,7 +210,7 @@ const Infra= () => {
        
   </form>
   </FormProvider>
-  </div>
+ 
     )
 };
 

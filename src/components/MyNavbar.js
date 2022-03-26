@@ -8,7 +8,7 @@ import classes from './MyNavbar.module.css';
 const MyNavbar = () => {
 return (
 <header className={classes.header}>
-  <Navbar bg="#012c55" variant="dark" >
+  <Navbar bg="#2b669c" variant="light" >
     <Container>
       <Navbar.Brand className={classes.logo}>RAID</Navbar.Brand>
 
@@ -23,10 +23,10 @@ return (
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/nsx">NSX</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tkg">TKG</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tca">TCA</NavLink>
-          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/download">Download</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vrli">vRLI</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vro">vRO</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vio">vIO</NavLink>
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/download">Download</NavLink>
         </nav>
         </Nav>
       </Navbar.Collapse>

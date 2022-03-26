@@ -21,9 +21,10 @@
   
   .nav  {
     list-style: none;
-    display: flex;
-    margin: 0;
+    display: block;
+    margin:50px ;
     padding: 0;
+    align-items: center;
   }
   
   .navlink{

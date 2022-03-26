@@ -1,8 +1,10 @@
 .App {
   text-align: center;
+  background-color: #042341;
 }
 .hidden {
   display: none;
+  background-color: #2b669c;
 }
 
 .formBox {
@@ -15,4 +17,5 @@
   font-size:'larger' ;
   padding:'1em'
 }
+
 

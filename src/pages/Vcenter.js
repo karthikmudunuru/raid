@@ -13,18 +13,6 @@ const fetchValueHandler = (data) => {
     console.log("This is " + id + " value: " + value)
 };
 
-const myTextAreaStyle= {
-    height: '100%', 
-    width:'100%', 
-    margin: '2em',
-    padding: '2em',
-    backgroundColor: 'ivory', 
-    fontWeight :'bold', 
-    fontSize:'larger' ,
-    padding:'1em',
-    borderStyle: 'solid',
-    borderColor: 'green'
-};
 
 
 const Vcenter= () =>{

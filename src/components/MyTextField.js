@@ -17,17 +17,25 @@ return (
         control={control}
       
         render={({ field}) => (
-    
+         
             <TextField
              {...field}
               label={label}
               error={!!errors[id]}
               variant="outlined" 
               helperText={errors[id] ? errors[id]?.message : ''}
-             /> 
+              margin="dense"
+              sx={{
+                bgcolor: 'white',
+                boxShadow: 1,
+                borderRadius: 2,
+                minWidth: 300,
+            }}
+              
+              /> 
            
-    
-           
+              
+          
           )}
        />
     </div>

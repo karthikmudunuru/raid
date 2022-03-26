@@ -9,7 +9,9 @@ import Tkg from './pages/Tkg';
 import Tca from './pages/Tca';
 import Download from './pages/Download';
 import Home from './pages/Home';
-
+import Vio from './pages/Vio';
+import Vrli from './pages/Vrli';
+import Vro from './pages/Vro';
 
 const App= () => {
   return (
@@ -35,13 +37,14 @@ const App= () => {
 
           <Route path="/tca" element={ <Tca/>} />
 
-          <Route path="/download" element={ <Download/>} />
-
           <Route path="/vrli" element={ <Vrli/>} />
 
           <Route path="vro" element={ <Vro/>} />
 
           <Route path="/vio" element={ <Vio/>} />
+
+          <Route path="/download" element={ <Download/>} />
+
            
          
       </Routes>

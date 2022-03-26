@@ -39,6 +39,13 @@ return (
             error={!!errors[id]}
             variant="outlined" 
             helperText={errors[id] ? errors[id]?.message : ''}
+            margin="normal"
+              sx={{
+                bgcolor: 'white',
+                boxShadow: 1,
+                borderRadius: 2,
+                minWidth: 300,
+              }}
             InputProps={{
             endAdornment: 
             <InputAdornment position="end">

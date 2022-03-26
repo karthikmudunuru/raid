@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm, FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
+import MyDropdown from '../components/MyDropdown';
+import Password from '../components/Password';
 import { infraActions } from '../store/infra';
 import { myTextAreaStyle, submitStyle } from '../store/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -46,7 +48,7 @@ const Vio= () =>{
                 <MyTextField label="VIO Management Gateway Address" id="vio_gateway_addr"  />
                 <MyTextField label="VIO Management Subnet Mask" id="vio_subnet_mask" />
                 <MyTextField label="VIO Node Username" id="vio_username" />
-                <Password label="VIO Manager Admin Password" id="vio_admin_password" />
+                <Password label="VIO User Password" id="vio_user_password" />
                 <MyTextField label="VIO License Key" id="vio_license_key"  />
                 
 

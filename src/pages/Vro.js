@@ -2,6 +2,9 @@ import React, {useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm, FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
+import MyDropdown from '../components/MyDropdown';
+import Password from '../components/Password';
+
 import { infraActions } from '../store/infra';
 import { myTextAreaStyle, submitStyle } from '../store/constants';
 import { yupResolver } from '@hookform/resolvers/yup';

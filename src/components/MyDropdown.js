@@ -19,15 +19,27 @@ return (
         <Controller
         name={id}
         control={control}
-        render={({ field }) => <Select 
+        render={({ field }) => 
+          <div>
+          <Select 
           {...field}
           label={label}
-          labelId={`${label}${id}`} 
+          labelId={`${label}${id}`}
+          margin="dense"
+          sx={{
+                bgcolor: 'white',
+                boxShadow: 1,
+                borderRadius: 2,
+                minWidth: 300,
+                margin: "8px",
+                padding:"4px" 
+              }} 
         
         >
           {menuItems}
         </Select>
-        
+        <br/>
+        </div>
         }
       />
     </div>
