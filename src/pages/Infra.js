@@ -11,7 +11,22 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { myTextAreaStyle,submitStyle,migration_options,pod_options,data_options,vsan_options,mainStyle,ipv4format } from '../store/constants';
 
-// mgmt_array_0: yup.string().required().matches(ipv4format,{message : "Enter a valid IP address"}),
+var infra_map;
+var temp_infra = {}; 
+
+
+
+const arrayMapper = (array_id,array_label) =>{
+
+    const vals = infra_map.get(array_id);
+
+    for(let i=0;i<vals.length;i++){
+      const e_label = array_label + (i+1);
+      temp_infra[e_label]=vals[i];
+    }
+
+}
+
 
 const schema = yup.object({
 
@@ -36,15 +51,17 @@ const schema = yup.object({
     infra_nfs_name: yup.string(),
     infra_res_count: yup.number().default(0),
     infra_edge_count: yup.number().default(0),
-    mgmt_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
+    mgmt_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).transform((value, originalValue) => value["value"]).matches(ipv4format,{message : "Enter a valid IP address"})),
     res_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
     edge_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
     pxe_array:  yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
-   
+    infra_pxe_count: yup.number().default(0),
+    pxe_username: yup.string(),
+    pxe_password:  yup.string(),
 
   }).required();
 
-var infra_map = new Map()
+//var infra_map = new Map()
 
 
 
@@ -87,42 +104,27 @@ const Infra= () => {
             mgmt_array:[],
             res_array:[],
             edge_array:[],
-            pxe_array:[]
+            pxe_array:[],
+            pxe_username:'',
+            pxe_password:''
         }
       });
 
-      //const mgmt_array_methods= useFieldArray({control, name: "mgmt_array"});
-      //const res_array_methods = useFieldArray({control, name: "res_array"});
-      //const edge_array_methods = useFieldArray({control, name: "edge_array"});
     
-    
-   
- 
-    const fetchValueHandler = (data) => {
-        const  {id,value} = data
-        //console.log("This is " + id + " value: " + value)
-        infra_map.set(id, value)
-    };
-
-
-    
-    const mgmt_count = methods.watch("infra_mgmt_count",0) 
-    console.log("watching",mgmt_count);   
-    if (parseInt(mgmt_count)>0 && !showmgmt){
+   const mgmt_count = methods.watch("infra_mgmt_count",0) 
+   if (parseInt(mgmt_count)>0 && !showmgmt){
        setShowmgmt(true);
      
     }
 
 
     const res_count = methods.watch("infra_res_count",0) 
-    //console.log("watching",mgmt_count);   
     if (parseInt(res_count)>0 && !showres){
        setShowres(true);
      
     }
 
     const edge_count = methods.watch("infra_edge_count",0) 
-    //console.log("watching",mgmt_count);   
     if (parseInt(edge_count)>0 && !showedge){
       setShowedge(true);
      
@@ -130,7 +132,6 @@ const Infra= () => {
    
 
     const pxe_count = methods.watch("infra_pxe_count",0) 
-    //console.log("watching",mgmt_count);   
     if (parseInt(pxe_count)>0 && !showpxe){
       setShowpxe(true);
      
@@ -144,7 +145,7 @@ const Infra= () => {
 
         return () => {
             console.log("Infra.js Unmounted");
-            const temp_infra = {}
+           /* const temp_infra = {}
             temp_infra["InfraNTPServer"]=infra_map.get("infra_ntp")
             temp_infra["InfraDNSServer"]=infra_map.get("infra_dns")
             temp_infra["InfraDomain"]=infra_map.get("infra_domain")
@@ -163,13 +164,48 @@ const Infra= () => {
             temp_infra["NFSIp"]=infra_map.get("infra_nfs_ip")
             temp_infra["NFSMountPoint"]=infra_map.get("infra_nfs_mountpoint")
             temp_infra["NFSName"]=infra_map.get("infra_nfs_name")
-            dispatch(infraActions.setConfig(temp_infra))
+            dispatch(infraActions.setConfig(temp_infra)) */
            
 
         }
     },[dispatch,methods.watch]);
 
-    const onSubmit = data => {console.log(data);}
+    const onSubmit = data => {
+      
+      //console.log(typeof data);
+      console.log(data);
+      infra_map  = new Map(Object.entries(data));
+      console.log("infra map is", infra_map);
+      temp_infra["InfraNTPServer"]=infra_map.get("infra_ntp");
+      temp_infra["InfraDNSServer"]=infra_map.get("infra_dns");
+      temp_infra["InfraDomain"]=infra_map.get("infra_domain");
+      temp_infra["Esxi_Mgmt_Network_Managed_by_VSS"]=infra_map.get("infra_migration");
+      temp_infra["MgmtHostUser"]=infra_map.get("mgmt_host_user");
+      temp_infra["MgmtHostPassword"]=infra_map.get("mgmt_host_password");
+      temp_infra["ResHostUser"]=infra_map.get("res_host_user");
+      temp_infra["ResHostPassword"]=infra_map.get("res_host_password");
+      temp_infra["EdgeHostUser"]=infra_map.get("edge_host_user");
+      temp_infra["EdgeHostPassword"]=infra_map.get("edge_host_password");
+      temp_infra["AllFlashvSAN"]=infra_map.get("infra_allflash_vsan");
+      temp_infra["MgmtDatastoreType"]=infra_map.get("mgmt_datastore");
+      temp_infra["ResDatastoreType"]=infra_map.get("res_datastore");
+      temp_infra["EdgeDatastoreType"]=infra_map.get("edge_datastore");
+      temp_infra["PODDesign"]=infra_map.get("pod_design");
+      temp_infra["NFSIp"]=infra_map.get("infra_nfs_ip");
+      temp_infra["NFSMountPoint"]=infra_map.get("infra_nfs_mountpoint");
+      temp_infra["NFSName"]=infra_map.get("infra_nfs_name");
+      temp_infra["PXEServerUser"]=infra_map.get("pxe_username");
+      temp_infra["PXEServerPassword"]=infra_map.get("pxe_password");
+      arrayMapper("mgmt_array","MgmtHostIp");
+      arrayMapper("res_array","ResHostIp");
+      arrayMapper("edge_array","EdgeHostIp");
+      arrayMapper("pxe_array","PXEServerIP");
+
+
+      dispatch(infraActions.setConfig(temp_infra)); 
+
+    
+    }
 
    
 

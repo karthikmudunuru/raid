@@ -4,8 +4,6 @@ import { useFormContext, Controller,useFieldArray} from "react-hook-form";
 import {ipv4format} from '../store/constants';
 
 
-//const ipv4format = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-
 const MyFieldArray = ({label, count,array_name}) => { 
 
   const { control,  formState :{errors}, watch, setValue} = useFormContext();
@@ -35,22 +33,24 @@ const MyFieldArray = ({label, count,array_name}) => {
 
   const handleBlur = (index,event) =>{
     const value= event.target.value;
+    const name= array_name + "_" + index;
+    const e_label=label + " " + (index+1); 
+    values[index]={n:name,l:e_label, value:value}
+    update(index,{n:name,l:e_label, value:value})
     if(index==0){
         if(value.match(ipv4format)){
           const pole = value.lastIndexOf(".");
           const last = parseInt(value.slice(pole+1)); 
-          console.log("first ipv4 field is ",last);
-          values[0].value=value;
+        
           const prefix= value.slice(0,pole);
           for(let i=1;i<count;i++){
             const val = last + i;
             const ip = prefix + "." + val;
             const name= array_name + "_" + i;
-            console.log("name and value is ", name,ip);
             setValue(name,ip);
+            update(i,{n:name,l:e_label, value:ip})
           }
-          //console.log("Values is",values);
-          //replace(values);
+        
         }
       }
     }
