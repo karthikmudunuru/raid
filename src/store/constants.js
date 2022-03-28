@@ -1,13 +1,33 @@
+
+export const ipv4format = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+
+export const mainStyle={
+    marginTop:'80px'
+};
+
+export const labelStyle={
+    color: '#AA01FF',
+    fontWeight:'bold',
+    fontSize:'18px',
+    letterSpacing:"1px"
+}
+
+
+
 export const submitStyle={
         border: 'none',
         color: 'white',
-        backgroundColor:'green',
+        backgroundColor:'#8d06ba',
         margin: '2em',
         padding: '1em',
         textAlign: 'center',
-        display: 'inlineBlock',
         transitionDuration: '0.4s',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        textTransform:'uppercase',
+        letterSpacing:'5px',
+        fontWeight:'bold',
+        fontSize:'16px' 
    
 };
 

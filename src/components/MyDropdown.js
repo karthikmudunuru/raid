@@ -2,6 +2,8 @@ import React from 'react';
 import { useFormContext, Controller } from "react-hook-form";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 
 const MyDropdown = ({id, label,options}) =>{ 
@@ -20,26 +22,27 @@ return (
         name={id}
         control={control}
         render={({ field }) => 
-          <div>
-          <Select 
-          {...field}
-          label={label}
-          labelId={`${label}${id}`}
-          margin="dense"
-          sx={{
-                bgcolor: 'white',
-                boxShadow: 1,
-                borderRadius: 2,
-                minWidth: 300,
-                margin: "8px",
-                padding:"4px" 
-              }} 
-        
-        >
-          {menuItems}
-        </Select>
-        <br/>
-        </div>
+        <FormControl sx={{ m: 1, minWidth: 400 }}>
+              <InputLabel id={`${label}${id}`}>{label}</InputLabel>
+              <Select 
+              {...field}
+              label={label}
+              labelId={`${label}${id}`}
+              margin="dense"
+              sx={{
+                    bgcolor: 'white',
+                    boxShadow: 1,
+                    borderRadius: 2,
+                    minWidth: 400,
+                    margin: "8px",
+                    padding:"4px" 
+                  }} 
+            
+            >
+              {menuItems}
+            </Select>
+            <br/>
+            </FormControl>
         }
       />
     </div>

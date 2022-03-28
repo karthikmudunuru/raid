@@ -9,18 +9,19 @@ import { useDispatch } from 'react-redux';
 import { infraActions } from '../store/infra';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { myTextAreaStyle,submitStyle,migration_options,pod_options,data_options,vsan_options } from '../store/constants';
+import { myTextAreaStyle,submitStyle,migration_options,pod_options,data_options,vsan_options,mainStyle,ipv4format } from '../store/constants';
 
-const ipv4format = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+// mgmt_array_0: yup.string().required().matches(ipv4format,{message : "Enter a valid IP address"}),
+
 const schema = yup.object({
 
-    infra_dns: yup.string().required().matches(ipv4format,{message : "Enter a valid IP address"}),
-    infra_ntp: yup.string().required().matches(ipv4format,{message : "Enter a valid IP address"}),
-    infra_domain: yup.string().required(),
+    infra_dns: yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}),
+    infra_ntp: yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}),
+    infra_domain: yup.string().required("This is a required field"),
     infra_migration: yup.string(),
     infra_mgmt_count: yup.number().default(0),
-    mgmt_host_user: yup.string().required(),
-    mgmt_host_password: yup.string().required(),
+    mgmt_host_user: yup.string().required("This is a required field"),
+    mgmt_host_password: yup.string().required("This is a required field"),
     res_host_user: yup.string(),
     res_host_password: yup.string(),
     edge_host_user: yup.string(),
@@ -35,10 +36,11 @@ const schema = yup.object({
     infra_nfs_name: yup.string(),
     infra_res_count: yup.number().default(0),
     infra_edge_count: yup.number().default(0),
-    mgmt_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
-    res_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
-    edge_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
-    mgmt_array_0: yup.string().required().matches(ipv4format,{message : "Enter a valid IP address"}),
+    mgmt_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
+    res_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
+    edge_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
+    pxe_array:  yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
+   
 
   }).required();
 
@@ -53,6 +55,7 @@ const Infra= () => {
     const [showmgmt,setShowmgmt] = useState(false);
     const [showres,setShowres] = useState(false);
     const [showedge,setShowedge] = useState(false);
+    const [showpxe,setShowpxe] = useState(false);
     
     const dispatch = useDispatch();
     const methods = useForm({
@@ -74,15 +77,17 @@ const Infra= () => {
             mgmt_datastore:'',
             res_datastore:'',
             edge_datastore:'',
-            pod_design:'',
+            pod_design:'2POD',
             infra_nfs_ip:'',
             infra_nfs_mountpoint:'',
             infra_nfs_name:'',
             infra_res_count:0,
             infra_edge_count:0,
+            infra_pxe_count:0,
             mgmt_array:[],
             res_array:[],
-            edge_array:[]
+            edge_array:[],
+            pxe_array:[]
         }
       });
 
@@ -124,6 +129,13 @@ const Infra= () => {
     }
    
 
+    const pxe_count = methods.watch("infra_pxe_count",0) 
+    //console.log("watching",mgmt_count);   
+    if (parseInt(pxe_count)>0 && !showpxe){
+      setShowpxe(true);
+     
+    }
+    
     useEffect(()=>{
         
         
@@ -157,42 +169,42 @@ const Infra= () => {
         }
     },[dispatch,methods.watch]);
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {console.log(data);}
 
    
 
- /*
+ 
     
-        <MyDropdown  label="Design" id="pod_design"  options={pod_options} getValue={(data)=> fetchValueHandler(data)}/>
-        <NumberField label= "Number of Edge Hosts" id="infra_edge_count" ref={EdgeCountRef} generate_label="EdgeHost Ip" generate_id="edge_host_ip"/>
-        ref={MgmtCountRef}
-
+       // <MyDropdown  label="Design" id="pod_design"  options={pod_options} getValue={(data)=> fetchValueHandler(data)}/>
+      
 
       
-        */
+       
 
     return (
 
    
      <FormProvider {...methods}>
-     <form onSubmit={methods.handleSubmit(onSubmit)}>
-
+   
+     <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
+        <br/><br/>
         <MyTextField label="DNS Server" id="infra_dns"  />
         <MyTextField  label="NTP Server" id="infra_ntp" />
         <MyTextField label="Infra Domain" id="infra_domain"  />
-        <MyDropdown label="Migrate Esxi Management Network from VSS to VDS" id="infra_migration" options={migration_options} />
+     
+        <MyDropdown label="Migrate Esxi Mgmt Network from VSS to VDS" id="infra_migration" options={migration_options} />
         
-        <NumberField  label= "Number of Management Hosts" id="infra_mgmt_count" />
+        <NumberField  label= " Number of Management Hosts" id="infra_mgmt_count" />
         {showmgmt && <MyFieldArray count={parseInt(mgmt_count)}  label="Management Host Ip"   array_name="mgmt_array" />}
         <MyTextField label="Management Host User" id="mgmt_host_user" />
         <Password label="Management Host Password" id="mgmt_host_password" />
         
-        <NumberField label= "Number of Resource Hosts" id="infra_res_count"  />
+        <NumberField label= " Number of Resource Hosts" id="infra_res_count"  />
         {showres && <MyFieldArray count={parseInt(res_count)} label="Resource Host Ip"  array_name="res_array"/>}
         <MyTextField label="Resource Host User" id="res_host_user" />
         <Password label="Resource Host Password" id="res_host_password" />
         
-        <NumberField label= "Number of Edge Hosts" id="infra_edge_count"  />
+        <NumberField label= " Number of Edge Hosts" id="infra_edge_count"  />
         {showedge && <MyFieldArray count={parseInt(edge_count)} label="EdgeHost Ip" array_name="edge_array" />}
         <MyTextField label="Edge Host User" id="edge_host_user" />
         <Password label="Edge Host Password" id="edge_host_password" />
@@ -206,10 +218,16 @@ const Infra= () => {
         <MyTextField label="NFS Mount Point" id="infra_nfs_mountpoint" />
         <MyTextField label="NFS Name" id="infra_nfs_name" />
 
+        <NumberField label= " Number of PXE Hosts" id="infra_pxe_count"  />
+        {showpxe && <MyFieldArray count={parseInt(pxe_count)} label="PXE Server Ip" array_name="pxe_array" />}
+        <MyTextField label="PXE Server Username" id="pxe_username" />
+        <Password label="PXE Server Password" id="pxe_password" />
+
         <input type="submit"  style={submitStyle} />
 
        
   </form>
+
   </FormProvider>
  
     )
