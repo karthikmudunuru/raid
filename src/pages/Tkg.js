@@ -1,50 +1,58 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm, FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
 import { infraActions } from '../store/infra';
-import { myTextAreaStyle, submitStyle } from '../store/constants';
+import { submitStyle } from '../store/constants';
+import {tkg_schema} from '../store/schemas';
+
+var tkg_map;
+var dispatch_tkg = {};
 
 
-
-
-
-var tkg_map = new Map();
 const Tkg= () =>{
     
-    const methods = useForm();
     const dispatch = useDispatch();
+    const methods = useForm({
+        resolver: yupResolver(tkg_schema),
+        defaultValues: 
+        {
 
-    const fetchValueHandler = (data) => {
-        const  {id,value} = data
-        //console.log("This is " + id + " value: " + value)
-        tkg_map.set(id, value)
-    };
-    
-    useEffect(()=>{
-
-        return () => {
-            const temp_tkg= {}
-            temp_tkg["TKGBaseImageOVAPath"] =tkg_map.get("tkg_binary_path")
-            temp_tkg["TKGBaseImageVMName"] =tkg_map.get("tkg_template_name")
-            temp_tkg["PhotonOS4OVAPath"] =tkg_map.get("tkg_photon_os")
-            temp_tkg["AirgapServerApplianceName"] =tkg_map.get("airgap_appliance_name")
-            temp_tkg["AirgapHostName"] =tkg_map.get("airgap_host_name")
-           
-            dispatch(infraActions.setConfig(temp_tkg))
-
+            tkg_binary_path : '',
+            tkg_template_name  : '',
+            tkg_photon_os  : '',
+            airgap_appliance_name  : '',
+            airgap_host_name : '',
         }
-    },[]);
+        });
+    
+
+   
+    
+   
+
+    const onSubmit = data => {
+        
+       
+        tkg_map = new Map(Object.entries(data));
+        dispatch_tkg["TKGBaseImageOVAPath"] =tkg_map.get("tkg_binary_path")
+        dispatch_tkg["TKGBaseImageVMName"] =tkg_map.get("tkg_template_name")
+        dispatch_tkg["PhotonOS4OVAPath"] =tkg_map.get("tkg_photon_os")
+        dispatch_tkg["AirgapServerApplianceName"] =tkg_map.get("airgap_appliance_name")
+        dispatch_tkg["AirgapHostName"] =tkg_map.get("airgap_host_name")
+        
+        dispatch(infraActions.setConfig(dispatch_tkg))
 
 
-    const onSubmit = data => console.log(data);
+    }
     
     
     return (
     
-        <div style={myTextAreaStyle}>
+        
             <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
+                <br/><br/>
             
                 <MyTextField label="TKG Base Image OVF Path" id="tkg_binary_path"  />
                 <MyTextField label="TKG Base Image VM Template Name" id="tkg_template_name"  />
@@ -52,12 +60,12 @@ const Tkg= () =>{
                 <MyTextField label="Airgap Server Applicance Name" id="airgap_appliance_name"  />
                 <MyTextField label="Airgap Server Host Name" id="airgap_host_name"  />
 
-                <input type="submit"/>
+                <input type="submit"  style={submitStyle} />
 
         
             </form>
             </FormProvider>
-        </div>
+       
     )
 };
 

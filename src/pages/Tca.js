@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {tca_schema} from '../store/schemas';
 
 var tca_map;
-var dispatch_tca = {};;
+var dispatch_tca = {};
 
 
 
@@ -80,7 +80,7 @@ const Tca= () =>{
         dispatch_tca["TcaMgrDatacenterLatitude"] = tca_map.get("tca_mgr_dc_lat" ) ;
         dispatch_tca["TcaMgrDatacenterLongitude"] = tca_map.get("tca_mgr_dc_lon")  ;
        
-        dispatch(infraActions.setConfig(dispatch_vc)); 
+        dispatch(infraActions.setConfig(dispatch_tca)); 
     }
 
     return (

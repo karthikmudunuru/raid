@@ -5,6 +5,19 @@ export const required_string_schema = yup.string().required("This is a required 
 
 export const string_schema = yup.string();
 
+export const tkg_schema = yup.object({
+            
+            tkg_binary_path :  required_string_schema,
+            tkg_template_name  :  required_string_schema,
+            tkg_photon_os  :  required_string_schema,
+            airgap_appliance_name  :  required_string_schema,
+            airgap_host_name :  required_string_schema,
+
+}).required();
+
+
+
+
 export const tca_schema = yup.object({
     tca_mgr_binary_path: required_string_schema,
     tca_mgr_appliance_name: required_string_schema,
