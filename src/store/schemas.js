@@ -23,6 +23,13 @@ export const vio_schema = yup.object({
 
 }).required();
 
+export const nsx_schema = yup.object({
+            
+  
+
+}).required();
+
+
 
 
 export const tkg_schema = yup.object({

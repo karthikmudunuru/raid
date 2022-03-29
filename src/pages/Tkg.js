@@ -25,7 +25,7 @@ const Tkg= () =>{
             airgap_appliance_name  : '',
             airgap_host_name : '',
         }
-        });
+    });
     
 
    

@@ -47,7 +47,7 @@ const Vio= () =>{
     const onSubmit = data => {
         
        
-        vio_map = new Map(Object.entries(data));
+       vio_map = new Map(Object.entries(data));
         
        dispatch_vio["VIOOVAPath"] = vio_map.get("vio_binary_path");
        dispatch_vio["VIODomainName"] = vio_map.get("vio_domain_name");
@@ -84,8 +84,6 @@ const Vio= () =>{
                 <MyTextField label="VIO Node Username" id="vio_username" />
                 <Password label="VIO User Password" id="vio_user_password" />
               
-                
-
                 <input type="submit"  style={submitStyle} />
 
 

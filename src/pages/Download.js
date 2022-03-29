@@ -8,10 +8,12 @@ const myTextAreaStyle= {
     width:'100%', 
     marginLeft: '1em', 
     marginRight : '1em', 
-    backgroundColor: 'ivory', 
+    backgroundColor: '#042341', 
     fontWeight :'bold', 
     fontSize:'larger' ,
     padding:'1em',
+    color:'white',
+    border: '1px solid #8d06ba',
 };
 
 const buttonStyle = {
