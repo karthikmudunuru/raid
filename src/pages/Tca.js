@@ -4,36 +4,92 @@ import { useForm, FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
 import MyDropdown from '../components/MyDropdown';
 import Password from '../components/Password';
-import { myTextAreaStyle,tca_options,submitStyle } from '../store/constants';
+import { tca_options,submitStyle,mainStyle } from '../store/constants';
+import { infraActions } from '../store/infra';
+import { yupResolver } from '@hookform/resolvers/yup';
+import {tca_schema} from '../store/schemas';
 
-
-
-
-
-
-const fetchValueHandler = (data) => {
-    const  {id,value} = data
-    console.log("This is " + id + " value: " + value)
-};
+var tca_map;
+var dispatch_tca = {};;
 
 
 
 const Tca= () =>{
 
-    const methods = useForm();
     const dispatch = useDispatch();
+    const methods = useForm({
+        resolver: yupResolver(tca_schema),
+        defaultValues: 
+        {
+            tca_mgr_binary_path: '',
+            tca_mgr_appliance_name: '',
+            tca_mgr_host_name: '',
+            tca_mgr_ssh_enable: '',
+            tca_mgr_ipv4_addr : '',
+            tca_mgr_ipv4_gateway_addr : '',
+            tca_mgr_ipv4_prefix : '',
+            tca_mgr_ipv4_dhcp_enable: '',
+            tca_mgr_ipv6_addr : '',
+            tca_mgr_ipv6_gateway_addr : '',
+            tca_mgr_ipv6_prefix : '',
+            tca_mgr_ipv6_dhcp_enable : '',
+            tca_mgr_root_password : '',
+            tca_mgr_cli_password : '',
+            tca_mgr_static_addr_01 : '',
+            tca_mgr_static_gateway_addr_01 : '',
+            tca_mgr_static_prefix_01 : '',
+            tca_mgr_static_addr_02 : '',
+            tca_mgr_static_gateway_addr_02 : '',
+            tca_mgr_static_prefix_02 : '',
+            tca_mgr_dc_city: '',
+            tca_mgr_dc_country: '',
+            tca_mgr_dc_lat: '',
+            tca_mgr_dc_lon: '',
+
+        }
+      });;
+  
 
     
-    const onSubmit = data => console.log(data);
-    
+    const onSubmit = data => {
+        
+        tca_map  = new Map(Object.entries(data));
+
+        dispatch_tca["TcaMgrOVAPath"] = tca_map.get("tca_mgr_binary_path")  ;
+        dispatch_tca["TcaMgrApplianceName"] = tca_map.get("tca_mgr_appliance_name")  ;
+        dispatch_tca["TcaMgrHostName"] = tca_map.get("tca_mgr_host_name")  ;
+        dispatch_tca["TcaMgrSSHEnable"] = tca_map.get("tca_mgr_ssh_enable")  ;
+        dispatch_tca["TcaMgrIpv4Address"] = tca_map.get("tca_mgr_ipv4_addr") ;
+        dispatch_tca["TcaMgrIpv4GateWay"] = tca_map.get("tca_mgr_ipv4_gateway_addr") ;
+        dispatch_tca["TcaMgrIpv4Prefix"] = tca_map.get("tca_mgr_ipv4_prefix") ;
+        dispatch_tca["TcaMgrIpv4DHCPEnable"] = tca_map.get("tca_mgr_ipv4_dhcp_enable")  ;
+        dispatch_tca["TcaMgrIpv6Address"] = tca_map.get("tca_mgr_ipv6_addr") ;
+        dispatch_tca["TcaMgrIpv6GateWay"] = tca_map.get("tca_mgr_ipv6_gateway_addr");
+        dispatch_tca["TcaMgrIpv6Prefix"] = tca_map.get("tca_mgr_ipv6_prefix");
+        dispatch_tca["TcaMgrIpv6DHCPEnable"] = tca_map.get("tca_mgr_ipv6_dhcp_enable")  ;
+        dispatch_tca["TcaMgrRootPassword"] = tca_map.get("tca_mgr_root_password") ;
+        dispatch_tca["TcaMgrCliPassword"] = tca_map.get("tca_mgr_cli_password") ;
+        dispatch_tca["TcaMgrStaticAddress01"] = tca_map.get("tca_mgr_static_addr_01") ;
+        dispatch_tca["TcaMgrStaticGateway01"] = tca_map.get("tca_mgr_static_gateway_addr_01");
+        dispatch_tca["TcaMgrStaticPrefix01"] = tca_map.get("tca_mgr_static_prefix_01");
+        dispatch_tca["TcaMgrStaticAddress02"] = tca_map.get("tca_mgr_static_addr_02");
+        dispatch_tca["TcaMgrStaticGateway02"] = tca_map.get("tca_mgr_static_gateway_addr_02");
+        dispatch_tca["TcaMgrStaticPrefix02"] = tca_map.get("tca_mgr_static_prefix_02");
+        dispatch_tca["TcaMgrDatacenterCity"] = tca_map.get("tca_mgr_dc_city")  ;
+        dispatch_tca["TcaMgrDatacenterCountry"] = tca_map.get("tca_mgr_dc_country") ;
+        dispatch_tca["TcaMgrDatacenterLatitude"] = tca_map.get("tca_mgr_dc_lat" ) ;
+        dispatch_tca["TcaMgrDatacenterLongitude"] = tca_map.get("tca_mgr_dc_lon")  ;
+       
+        dispatch(infraActions.setConfig(dispatch_vc)); 
+    }
 
     return (
         
-        <div style={myTextAreaStyle}>
+      
         <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
 
-            
+            <br/><br/>
             <MyTextField label="TCA OVA Path" id="tca_mgr_binary_path"  />
             <MyTextField label="TCA Manager Applicance Name" id="tca_mgr_appliance_name"  />
             <MyTextField label="TCA Manager Host Name" id="tca_mgr_host_name"  />
@@ -61,12 +117,12 @@ const Tca= () =>{
             <MyTextField label="TCA Manager Datacenter Latitude" id="tca_mgr_dc_lat"  />
             <MyTextField label="TCA Manager Datacenter Longitude" id="tca_mgr_dc_lon"  />
 
-            <input className="submit" type="submit"/>
+            <input style={submitStyle} type="submit"/>
 
         
         </form>
         </FormProvider>
-        </div>
+       
 
 );
 }; 

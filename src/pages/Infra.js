@@ -1,4 +1,4 @@
-import React, {useEffect , useState} from 'react';
+import React, {useState} from 'react';
 import { useForm,FormProvider,useFieldArray,Controller } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
 import NumberField from '../components/NumberField';
@@ -9,10 +9,10 @@ import { useDispatch } from 'react-redux';
 import { infraActions } from '../store/infra';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { myTextAreaStyle,submitStyle,migration_options,pod_options,data_options,vsan_options,mainStyle,ipv4format } from '../store/constants';
+import {submitStyle,migration_options,pod_options,data_options,vsan_options,mainStyle,ipv4format } from '../store/constants';
 
 var infra_map;
-var temp_infra = {}; 
+var dispatch_infra = {}; 
 
 
 
@@ -22,13 +22,13 @@ const arrayMapper = (array_id,array_label) =>{
 
     for(let i=0;i<vals.length;i++){
       const e_label = array_label + (i+1);
-      temp_infra[e_label]=vals[i];
+      dispatch_infra[e_label]=vals[i];
     }
 
 }
 
 
-const schema = yup.object({
+const infra_schema = yup.object({
 
     infra_dns: yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}),
     infra_ntp: yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}),
@@ -61,10 +61,6 @@ const schema = yup.object({
 
   }).required();
 
-//var infra_map = new Map()
-
-
-
 
 
 const Infra= () => {
@@ -76,7 +72,7 @@ const Infra= () => {
     
     const dispatch = useDispatch();
     const methods = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(infra_schema),
         defaultValues: 
         {
             infra_dns: '',
@@ -137,72 +133,45 @@ const Infra= () => {
      
     }
     
-    useEffect(()=>{
+   /* useEffect(()=>{
         
-        
-      
-        
-
         return () => {
-            console.log("Infra.js Unmounted");
-           /* const temp_infra = {}
-            temp_infra["InfraNTPServer"]=infra_map.get("infra_ntp")
-            temp_infra["InfraDNSServer"]=infra_map.get("infra_dns")
-            temp_infra["InfraDomain"]=infra_map.get("infra_domain")
-            temp_infra["Esxi_Mgmt_Network_Managed_by_VSS"]=infra_map.get("infra_migration")
-            temp_infra["MgmtHostUser"]=infra_map.get("mgmt_host_user")
-            temp_infra["MgmtHostPassword"]=infra_map.get("mgmt_host_password")
-            temp_infra["ResHostUser"]=infra_map.get("res_host_user")
-            temp_infra["ResHostPassword"]=infra_map.get("res_host_password")
-            temp_infra["EdgeHostUser"]=infra_map.get("edge_host_user")
-            temp_infra["EdgeHostPassword"]=infra_map.get("edge_host_password")
-            temp_infra["AllFlashvSAN"]=infra_map.get("infra_allflash_vsan")
-            temp_infra["MgmtDatastoreType"]=infra_map.get("mgmt_datastore")
-            temp_infra["ResDatastoreType"]=infra_map.get("res_datastore")
-            temp_infra["EdgeDatastoreType"]=infra_map.get("edge_datastore")
-            temp_infra["PODDesign"]=infra_map.get("pod_design")
-            temp_infra["NFSIp"]=infra_map.get("infra_nfs_ip")
-            temp_infra["NFSMountPoint"]=infra_map.get("infra_nfs_mountpoint")
-            temp_infra["NFSName"]=infra_map.get("infra_nfs_name")
-            dispatch(infraActions.setConfig(temp_infra)) */
-           
-
-        }
-    },[dispatch,methods.watch]);
+         }
+      },[]); */
 
     const onSubmit = data => {
       
       //console.log(typeof data);
-      console.log(data);
+      //console.log(data);
       infra_map  = new Map(Object.entries(data));
-      console.log("infra map is", infra_map);
-      temp_infra["InfraNTPServer"]=infra_map.get("infra_ntp");
-      temp_infra["InfraDNSServer"]=infra_map.get("infra_dns");
-      temp_infra["InfraDomain"]=infra_map.get("infra_domain");
-      temp_infra["Esxi_Mgmt_Network_Managed_by_VSS"]=infra_map.get("infra_migration");
-      temp_infra["MgmtHostUser"]=infra_map.get("mgmt_host_user");
-      temp_infra["MgmtHostPassword"]=infra_map.get("mgmt_host_password");
-      temp_infra["ResHostUser"]=infra_map.get("res_host_user");
-      temp_infra["ResHostPassword"]=infra_map.get("res_host_password");
-      temp_infra["EdgeHostUser"]=infra_map.get("edge_host_user");
-      temp_infra["EdgeHostPassword"]=infra_map.get("edge_host_password");
-      temp_infra["AllFlashvSAN"]=infra_map.get("infra_allflash_vsan");
-      temp_infra["MgmtDatastoreType"]=infra_map.get("mgmt_datastore");
-      temp_infra["ResDatastoreType"]=infra_map.get("res_datastore");
-      temp_infra["EdgeDatastoreType"]=infra_map.get("edge_datastore");
-      temp_infra["PODDesign"]=infra_map.get("pod_design");
-      temp_infra["NFSIp"]=infra_map.get("infra_nfs_ip");
-      temp_infra["NFSMountPoint"]=infra_map.get("infra_nfs_mountpoint");
-      temp_infra["NFSName"]=infra_map.get("infra_nfs_name");
-      temp_infra["PXEServerPassword"]=infra_map.get("pxe_password");
-      temp_infra["PXEServerUser"]=infra_map.get("pxe_username");
-      temp_infra["PXEbootServerCount"]=infra_map.get("pxe_array").length;
+      //console.log("infra map is", infra_map);
+      dispatch_infra["InfraNTPServer"]=infra_map.get("infra_ntp");
+      dispatch_infra["InfraDNSServer"]=infra_map.get("infra_dns");
+      dispatch_infra["InfraDomain"]=infra_map.get("infra_domain");
+      dispatch_infra["Esxi_Mgmt_Network_Managed_by_VSS"]=infra_map.get("infra_migration");
+      dispatch_infra["MgmtHostUser"]=infra_map.get("mgmt_host_user");
+      dispatch_infra["MgmtHostPassword"]=infra_map.get("mgmt_host_password");
+      dispatch_infra["ResHostUser"]=infra_map.get("res_host_user");
+      dispatch_infra["ResHostPassword"]=infra_map.get("res_host_password");
+      dispatch_infra["EdgeHostUser"]=infra_map.get("edge_host_user");
+      dispatch_infra["EdgeHostPassword"]=infra_map.get("edge_host_password");
+      dispatch_infra["AllFlashvSAN"]=infra_map.get("infra_allflash_vsan");
+      dispatch_infra["MgmtDatastoreType"]=infra_map.get("mgmt_datastore");
+      dispatch_infra["ResDatastoreType"]=infra_map.get("res_datastore");
+      dispatch_infra["EdgeDatastoreType"]=infra_map.get("edge_datastore");
+      dispatch_infra["PODDesign"]=infra_map.get("pod_design");
+      dispatch_infra["NFSIp"]=infra_map.get("infra_nfs_ip");
+      dispatch_infra["NFSMountPoint"]=infra_map.get("infra_nfs_mountpoint");
+      dispatch_infra["NFSName"]=infra_map.get("infra_nfs_name");
+      dispatch_infra["PXEServerPassword"]=infra_map.get("pxe_password");
+      dispatch_infra["PXEServerUser"]=infra_map.get("pxe_username");
+      dispatch_infra["PXEbootServerCount"]=infra_map.get("pxe_array").length;
       arrayMapper("mgmt_array","MgmtHostIp");
       arrayMapper("res_array","ResHostIp");
       arrayMapper("edge_array","EdgeHostIp");
       arrayMapper("pxe_array","PXEServerIP");
       
-      dispatch(infraActions.setConfig(temp_infra)); 
+      dispatch(infraActions.setConfig(dispatch_infra)); 
 
     
     }
