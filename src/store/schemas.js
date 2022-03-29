@@ -5,6 +5,26 @@ export const required_string_schema = yup.string().required("This is a required 
 
 export const string_schema = yup.string();
 
+export const vrli_schema = yup.object({
+            
+  
+
+}).required();
+
+export const vro_schema = yup.object({
+            
+  
+
+}).required();
+
+export const vio_schema = yup.object({
+            
+  
+
+}).required();
+
+
+
 export const tkg_schema = yup.object({
             
             tkg_binary_path :  required_string_schema,

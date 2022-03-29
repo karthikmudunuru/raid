@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useForm, FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
 import { infraActions } from '../store/infra';
-import { submitStyle } from '../store/constants';
+import { submitStyle,mainStyle } from '../store/constants';
 import {tkg_schema} from '../store/schemas';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 var tkg_map;
 var dispatch_tkg = {};

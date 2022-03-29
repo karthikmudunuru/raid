@@ -1,44 +1,82 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm, FormProvider  } from "react-hook-form";
 import MyTextField from '../components/MyTextField';
-import MyDropdown from '../components/MyDropdown';
 import Password from '../components/Password';
 import { infraActions } from '../store/infra';
-import { myTextAreaStyle, submitStyle } from '../store/constants';
+import { submitStyle,mainStyle} from '../store/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import {vrli_schema} from '../store/schemas';
 
 
 
-
+var vrli_map;
+var dispatch_vrli = {};
 
 
 const Vrli= () =>{
     
-    const methods = useForm();
+    
+    
     const dispatch = useDispatch();
+    const methods = useForm({
+        resolver: yupResolver(vrli_schema),
+        defaultValues: 
+        {
+            vrli_binary_path:'',
+            vrli_ip_addr:'',
+            vrli_vip_addr:'',
+            vrli_host_name:'',
+            vrli_appliance_name:'',
+            vrli_virtual_fqdn:'',
+            vrli_gateway_addr:'',
+            vrli_subnet_mask:'',
+            vrli_root_password:'',
+            vrli_username:'',
+            vrli_email:'',
+            vrli_content_path:'',
+
+           
+        }
+        });
+    
 
    
     
-    useEffect(()=>{
-
-        return () => {
-           
-
-        }
-    },[]);
 
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        
+       
+        vrli_map = new Map(Object.entries(data));
+        
+        dispatch_vrli["LogInsightNodeOVAPath"]= vrli_map.get("vrli_binary_path");
+        dispatch_vrli["LogInsightMNodeIpAddress"]= vrli_map.get("vrli_ip_addr");
+        dispatch_vrli["LogInsightVIPAddress"]= vrli_map.get("vrli_vip_addr");
+        dispatch_vrli["LogInsightMNodeDomainName"]= vrli_map.get("vrli_host_name");
+        dispatch_vrli["LogInsightMNodeVMName"]= vrli_map.get("vrli_appliance_name");
+        dispatch_vrli["LogInsightVIPFQDN"]= vrli_map.get("vrli_virtual_fqdn");
+        dispatch_vrli["LogInsightNodeGateWay"]= vrli_map.get("vrli_gateway_addr");
+        dispatch_vrli["LogInsightNodeNetMask"]= vrli_map.get("vrli_subnet_mask");
+        dispatch_vrli["LogInsightNodeRootPassword"]= vrli_map.get("vrli_root_password");
+        dispatch_vrli["LogInsightUserName"]= vrli_map.get("vrli_username");
+        dispatch_vrli["LogInsightemailid"]= vrli_map.get("vrli_email");
+        dispatch_vrli["ContentPackLocation"]= vrli_map.get("vrli_content_path");
+
+
+        dispatch(infraActions.setConfig(dispatch_vrli));
+
+
+    }
+    
     
     
     return (
     
-        <div style={myTextAreaStyle}>
-            <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
-            
+       
+        <FormProvider {...methods}>
+        <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
+                <br/><br/>
                 <MyTextField label="Log Insight Ova Path " id="vrli_binary_path"  />
                 <MyTextField label="Log Insight Ip address" id="vrli_ip_addr"  />
                 <MyTextField label="Log Insight Virtual Ip address" id="vrli_vip_addr"  />
@@ -56,9 +94,9 @@ const Vrli= () =>{
 
 
         
-            </form>
-            </FormProvider>
-        </div>
+        </form>
+        </FormProvider>
+        
     )
 };
 
