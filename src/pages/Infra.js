@@ -194,14 +194,14 @@ const Infra= () => {
       temp_infra["NFSIp"]=infra_map.get("infra_nfs_ip");
       temp_infra["NFSMountPoint"]=infra_map.get("infra_nfs_mountpoint");
       temp_infra["NFSName"]=infra_map.get("infra_nfs_name");
-      temp_infra["PXEServerUser"]=infra_map.get("pxe_username");
       temp_infra["PXEServerPassword"]=infra_map.get("pxe_password");
+      temp_infra["PXEServerUser"]=infra_map.get("pxe_username");
+      temp_infra["PXEbootServerCount"]=infra_map.get("pxe_array").length;
       arrayMapper("mgmt_array","MgmtHostIp");
       arrayMapper("res_array","ResHostIp");
       arrayMapper("edge_array","EdgeHostIp");
       arrayMapper("pxe_array","PXEServerIP");
-
-
+      
       dispatch(infraActions.setConfig(temp_infra)); 
 
     

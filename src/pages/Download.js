@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { saveAs } from 'file-saver';
+import Button from '@mui/material/Button';
 
 const myTextAreaStyle= {
     height: '100%', 
@@ -10,9 +11,18 @@ const myTextAreaStyle= {
     backgroundColor: 'ivory', 
     fontWeight :'bold', 
     fontSize:'larger' ,
-    padding:'1em'
+    padding:'1em',
 };
 
+const buttonStyle = {
+    margin:'1em',
+    marginTop:'100px',
+    cursor: 'pointer',
+    textTransform:'uppercase',
+    letterSpacing:'5px',
+    fontWeight:'bold',
+    fontSize:'16px' 
+};
 
 const Download= () =>{
     const [input,setInput]= useState(" ");
@@ -38,10 +48,8 @@ const Download= () =>{
     
         <React.Fragment>
              
-            <button onClick={downloadFile} style={{margin: '2em'}} >
-            Download the file!
-            </button>
-            <textarea readOnly rows="500"  style={myTextAreaStyle}
+            <Button style={buttonStyle} onClick={downloadFile} variant='contained' color='secondary' size="large"> Download! </Button>
+           <textarea readOnly rows="500"  style={myTextAreaStyle}
                 value={input}
              />
 
