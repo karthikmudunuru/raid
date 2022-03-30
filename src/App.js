@@ -11,7 +11,7 @@ import Download from './pages/Download';
 import Home from './pages/Home';
 import Vio from './pages/Vio';
 import Vrli from './pages/Vrli';
-import Vro from './pages/Vro';
+import Vrops from './pages/Vrops';
 import Vcd from './pages/Vcd';
 
 const App= () => {
@@ -42,7 +42,7 @@ const App= () => {
 
           <Route path="/vrli" element={ <Vrli/>} />
 
-          <Route path="vro" element={ <Vro/>} />
+          <Route path="vrops" element={ <Vrops/>} />
 
           <Route path="/vio" element={ <Vio/>} />
 

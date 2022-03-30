@@ -22,9 +22,19 @@ const Vcd= () =>{
         resolver: yupResolver(vcd_schema),
         defaultValues:
         {
-          
-         
-
+            vcd_binary_path: '',
+            vcd_appliance_name: '',
+            vcd_ip_addr: '',
+            vcd_gateway_addr: '',
+            vcd_subnet_mask: '',
+            vcd_prefix: '',
+            vcd_root_password: '',
+            vcd_admin_username: '',
+            vcd_admin_fullname: '',
+            vcd_admin_password: '',
+            vcd_admin_email: '',
+            vcd_system_name: '',
+            vcd_install_id: '',
         }
     
     
@@ -68,16 +78,16 @@ const Vcd= () =>{
             
             <br/><br/>
             
-            <MyTextField label="VCD Binary Path" id="vcd_binary_path"  />
-            <MyTextField label="VCD Applicance Name" id="vcd_appliance_name"  />
-            <MyTextField label="VCD VIP Address" id="vcd_ip_addr" />
-            <MyTextField label="VCD Gateway Address" id="vcd_gateway_addr" />
-            <MyTextField label="VCD Subnet Mask" id="vcd_subnet_mask" />
+            <MyTextField label="VCD Binary Path" id="vcd_binary_path"  required />
+            <MyTextField label="VCD Applicance Name" id="vcd_appliance_name" required />
+            <MyTextField label="VCD VIP Address" id="vcd_ip_addr" required />
+            <MyTextField label="VCD Gateway Address" id="vcd_gateway_addr" required />
+            <MyTextField label="VCD Subnet Mask" id="vcd_subnet_mask" required />
             <MyTextField label="VCD Network Prefix" id="vcd_prefix"  />
-            <Password label="VCD Root Password" id="vcd_root_password" />
-            <MyTextField label="VCD Admin Username" id="vcd_admin_username"  />
+            <Password label="VCD Root Password" id="vcd_root_password" required />
+            <MyTextField label="VCD Admin Username" id="vcd_admin_username"  required />
             <MyTextField label="VCD Admin Full name" id="vcd_admin_fullname"  />
-            <Password label="VCD Admin Password" id="vcd_admin_password" />
+            <Password label="VCD Admin Password" id="vcd_admin_password" required />
             <MyTextField label="VCD Admin Email" id="vcd_admin_email"  />
             <MyTextField label="VCD System name" id="vcd_system_name"  />
             <MyTextField label="VCD Install ID" id="vcd_install_id"  />

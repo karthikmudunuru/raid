@@ -16,6 +16,19 @@ export const number_schema = yup.number().default(0);
 
 export const vcd_schema = yup.object({
             
+    vcd_binary_path: required_string_schema,
+    vcd_appliance_name: required_string_schema,
+    vcd_ip_addr: ip_required_schema,
+    vcd_gateway_addr: ip_required_schema,
+    vcd_subnet_mask: ip_required_schema,
+    vcd_prefix: string_schema,
+    vcd_root_password:required_string_schema,
+    vcd_admin_username:required_string_schema,
+    vcd_admin_fullname: string_schema,
+    vcd_admin_password: required_string_schema,
+    vcd_admin_email: string_schema,
+    vcd_system_name:string_schema,
+    vcd_install_id: string_schema,
   
 
     
@@ -36,14 +49,24 @@ export const vrli_schema = yup.object({
     vrli_username: required_string_schema,
     vrli_email: string_schema,
     vrli_content_path: string_schema,
-
-
     
     }).required();
 
-export const vro_schema = yup.object({
+export const vrops_schema = yup.object({
             
-  
+    vrops_binary_path : required_string_schema,
+    vrops_master_ip : required_string_schema,
+    vrops_replica_ip : string_schema,
+    vrops_data_count :yup.number().default(0),
+    vrops_master_vm_name : required_string_schema,
+    vrops_replica_vm_name : string_schema,
+    vrops_data_vm_name : string_schema,
+    vrops_gateway_addr :  required_string_schema,
+    vrops_subnet_mask :  required_string_schema,
+    vrops_username : required_string_schema,
+    vrops_admin_password : required_string_schema,
+    vrops_license_key : string_schema,
+    vrops_data_array: array_ip_required_schema,
 
     
     }).required();

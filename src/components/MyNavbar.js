@@ -24,7 +24,7 @@ return (
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tkg">TKG</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tca">TCA</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vrli">vRLI</NavLink>
-          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vro">vROPS</NavLink>
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vrops">vROPS</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vio">vIO</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vcd">VCD</NavLink>
 
