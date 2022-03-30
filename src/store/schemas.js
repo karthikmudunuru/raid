@@ -18,32 +18,88 @@ export const vcd_schema = yup.object({
             
   
 
-}).required();
+    
+    }).required();
 
 
 export const vrli_schema = yup.object({
             
-  
+    vrli_binary_path: required_string_schema,
+    vrli_ip_addr: ip_required_schema,
+    vrli_vip_addr: ip_required_schema,
+    vrli_host_name: required_string_schema,
+    vrli_appliance_name: required_string_schema,
+    vrli_virtual_fqdn: required_string_schema,
+    vrli_gateway_addr: ip_required_schema,
+    vrli_subnet_mask: ip_required_schema,
+    vrli_root_password: required_string_schema,
+    vrli_username: required_string_schema,
+    vrli_email: string_schema,
+    vrli_content_path: string_schema,
 
-}).required();
+
+    
+    }).required();
 
 export const vro_schema = yup.object({
             
   
 
-}).required();
+    
+    }).required();
 
 export const vio_schema = yup.object({
             
-  
+    vio_binary_path : required_string_schema,
+    vio_domain_name : required_string_schema,
+    vio_vm_name : required_string_schema,
+    vio_mgmt_ip : ip_required_schema,
+    vio_start_mgmt_ip : ip_schema,
+    vio_end_mgmt_ip : ip_schema,
+    vio_gateway_addr : ip_required_schema,
+    vio_subnet_mask : ip_required_schema,
+    vio_username : required_string_schema,
+    vio_user_password : required_string_schema,
 
-}).required();
+    
+    }).required();
 
 export const nsx_schema = yup.object({
             
-  
 
-}).required();
+        nsx_mgr_binary_path: required_string_schema,
+        nsx_mgr_appliance_name: required_string_schema,
+        nsx_mgr_host_name: required_string_schema,
+        nsx_mgr_ip_addr:  ip_required_schema,
+        nsx_mgr_gateway_addr: ip_required_schema,
+        nsx_mgr_subnet_mask: ip_required_schema,
+        nsx_mgr_prefix: required_string_schema,
+        nsx_mgr_root_password: required_string_schema,
+        nsx_mgr_cli_password: required_string_schema,
+        nsx_mgr_admin_password: required_string_schema,
+        nsx_mgr_audit_password: string_schema,
+        nsx_mgr_admin_name: required_string_schema,
+        nsx_mgr_audit_name: string_schema,
+        nsx_mgr_nw_type: string_schema,
+        nsx_mgr_form_size: required_string_schema,
+        nsx_mgr_license: string_schema,
+        nsx_mgr_email: string_schema,
+        nsx_edge_root_password: string_schema,
+        nsx_edge_cli_password: string_schema,
+        nsx_pool_start: ip_required_schema,
+        nsx_pool_end: ip_required_schema,
+        nsx_pool_cidr: string_schema,
+        nsx_overlay_tz_name: string_schema,
+        nsx_overlay_tz_host: string_schema,
+        nsx_overlay_tz_desc: string_schema,
+        nsx_vlan_tz_name: string_schema,
+        nsx_vlan_tz_host: string_schema,
+        nsx_vlan_tz_desc: string_schema,
+        nsx_edge_array: array_ip_required_schema,
+        nsx_edge_count: number_schema,
+
+    
+    }).required();
 
 
 
