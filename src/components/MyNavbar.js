@@ -10,7 +10,7 @@ return (
 <header className={classes.header}>
   <Navbar bg="#2b669c" variant="light" >
     <Container>
-      <Navbar.Brand className={classes.logo}>RAID</Navbar.Brand>
+      <Navbar.Brand className={classes.logo}>Automated Infrastructure Deployer</Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -24,8 +24,10 @@ return (
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tkg">TKG</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/tca">TCA</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vrli">vRLI</NavLink>
-          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vro">vRO</NavLink>
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vro">vROPS</NavLink>
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vio">vIO</NavLink>
+          <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/vcd">VCD</NavLink>
+
           <NavLink className={(navData)=> navData.isActive ? classes.activelink :classes.navlink} to="/download">Download</NavLink>
         </nav>
         </Nav>

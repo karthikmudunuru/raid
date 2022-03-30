@@ -1,9 +1,25 @@
 import * as yup from "yup";
+import { ipv4format } from "./constants";
 
 export const required_string_schema = yup.string().required("This is a required field");
 
 
 export const string_schema = yup.string();
+
+export const ip_required_schema = yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"});
+
+export const ip_schema = yup.string().matches(ipv4format,{message : "Enter a valid IP address"});
+
+export const array_ip_required_schema = yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).transform((value, originalValue) => value["value"]).matches(ipv4format,{message : "Enter a valid IP address"}));
+
+export const number_schema = yup.number().default(0);
+
+export const vcd_schema = yup.object({
+            
+  
+
+}).required();
+
 
 export const vrli_schema = yup.object({
             
@@ -28,6 +44,43 @@ export const nsx_schema = yup.object({
   
 
 }).required();
+
+
+
+export const infra_schema = yup.object({
+
+    infra_dns:  ip_required_schema,
+    infra_ntp:  ip_required_schema,
+    infra_domain: required_string_schema,
+    infra_migration: string_schema,
+    infra_mgmt_count: yup.number().default(0),
+    mgmt_host_user: required_string_schema,
+    mgmt_host_password: required_string_schema,
+    res_host_user: string_schema,
+    res_host_password: string_schema,
+    edge_host_user: string_schema,
+    edge_host_password: string_schema,
+    infra_allflash_vsan: string_schema,
+    mgmt_datastore: string_schema,
+    res_datastore: string_schema,
+    edge_datastore: string_schema,
+    pod_design: string_schema,
+    infra_nfs_ip: ip_schema,
+    infra_nfs_mountpoint: string_schema,
+    infra_nfs_name: string_schema,
+    infra_res_count: yup.number().default(0),
+    infra_edge_count: yup.number().default(0),
+    mgmt_array: array_ip_required_schema,
+    res_array: array_ip_required_schema,
+    edge_array: array_ip_required_schema,
+    pxe_array:  array_ip_required_schema,
+    infra_pxe_count: yup.number().default(0),
+    pxe_username: string_schema,
+    pxe_password:  string_schema,
+
+  }).required();
+
+
 
 
 

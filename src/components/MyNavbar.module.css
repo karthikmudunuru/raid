@@ -16,16 +16,16 @@
   .logo {
     color: red !important;
     font-style: italic !important;
-    font-family: cursive !important;
+    font-family: 'Times New Roman', Times, serif !important;
     font-size: xx-large !important ;
   }
   
   .nav  {
     list-style: none;
     display: block;
-    margin:50px ;
     padding: 0;
     align-items: center;
+    letter-spacing: 2px;
   }
   
   .navlink{
@@ -33,6 +33,7 @@
     font-size: 1.25rem;
     text-decoration: none;
     color: #88dfdf;
+   
   }
 
   .activelink{

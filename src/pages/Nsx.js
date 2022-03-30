@@ -15,6 +15,18 @@ import {nsx_schema} from '../store/schemas';
 var nsx_map;
 var dispatch_nsx = {};
 
+const arrayMapper = (array_id,array_label) =>{
+
+    const vals = nsx_map.get(array_id);
+
+    for(let i=0;i<vals.length;i++){
+      const e_label = array_label + (i+1);
+      dispatch_nsx[e_label]=vals[i];
+    }
+
+}
+
+
 
 const Nsx= () =>{
     
@@ -27,6 +39,36 @@ const Nsx= () =>{
         defaultValues: 
         {
 
+            nsx_mgr_binary_path:'',
+            nsx_mgr_appliance_name:'',
+            nsx_mgr_host_name:'',
+            nsx_mgr_ip_addr:'',
+            nsx_mgr_gateway_addr:'',
+            nsx_mgr_subnet_mask:'',
+            nsx_mgr_prefix:'',
+            nsx_mgr_root_password:'',
+            nsx_mgr_cli_password:'',
+            nsx_mgr_admin_password:'',
+            nsx_mgr_audit_password:'',
+            nsx_mgr_admin_name:'',
+            nsx_mgr_audit_name:'',
+            nsx_mgr_nw_type:'',
+            nsx_mgr_form_size:'',
+            nsx_mgr_license:'',
+            nsx_mgr_email:'',
+            nsx_edge_root_password:'',
+            nsx_edge_cli_password:'',
+            nsx_pool_start:'',
+            nsx_pool_end:'',
+            nsx_pool_cidr:'',
+            nsx_overlay_tz_name:'',
+            nsx_overlay_tz_host:'',
+            nsx_overlay_tz_desc:'',
+            nsx_vlan_tz_name:'',
+            nsx_vlan_tz_host:'',
+            nsx_vlan_tz_desc:'',
+            nsx_edge_array:[],
+            nsx_edge_count:0,
           
         }
     });
@@ -63,8 +105,7 @@ const Nsx= () =>{
 
 
         dispatch_nsx["NSXTemailid"]=nsx_map.get("nsx_mgr_email")
-        dispatch_nsx["NsxTEdgeNodeIp1"]=nsx_map.get("nsx_edge_01_addr")
-        dispatch_nsx["NsxTEdgeNodeIp2"]=nsx_map.get("nsx_edge_02_addr")
+       
         dispatch_nsx["EdgeRootPassword"]=nsx_map.get("nsx_edge_root_password")
         dispatch_nsx["EdgeCLIPassword"]=nsx_map.get("nsx_edge_cli_password")
 
@@ -77,6 +118,7 @@ const Nsx= () =>{
         dispatch_nsx["VLAN_Transport_Zone_display_name"]=nsx_map.get("nsx_vlan_tz_name")
         dispatch_nsx["VLAN_Transport_Zone_host_switch_name"]=nsx_map.get("nsx_vlan_tz_host")
         dispatch_nsx["VLAN_Transport_Zone_description"]=nsx_map.get("nsx_vlan_tz_desc")
+        arrayMapper("nsx_edge_array","NsxTEdgeNodeIp");
         dispatch(infraActions.setConfig(dispatch_nsx))
        
 
@@ -115,8 +157,7 @@ const Nsx= () =>{
             <NumberField label= " Number of Edge Nodes" id="nsx_edge_count"  />
             {showNsxEdge && <MyFieldArray count={parseInt(nsx_edge_count)} label="NSXT Edge Node Ip" array_name="nsx_edge_array" />}
        
-            <MyTextField label="NSX-T Edge Node 01 IP Address" id="nsx_edge_01_addr" />
-            <MyTextField label="NSX-T Edge Node 02 IP Address" id="nsx_edge_02_addr" />
+         
             <Password label="NSX-T Edge Root Password" id="nsx_edge_root_password" />
             <Password label="NSX-T Edge CLI Password" id="nsx_edge_cli_password" />
             

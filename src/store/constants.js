@@ -36,7 +36,7 @@ export const myTextAreaStyle= {
         width:'100%', 
         margin: '2em',
         padding: '2em',
-        backgroundColor: 'ivory', 
+        color:'white',
         fontWeight :'bold', 
         fontSize:'larger' ,
         padding:'1em',

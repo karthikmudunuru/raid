@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Vio from './pages/Vio';
 import Vrli from './pages/Vrli';
 import Vro from './pages/Vro';
+import Vcd from './pages/Vcd';
 
 const App= () => {
   return (
@@ -36,6 +37,8 @@ const App= () => {
           <Route path="/tkg" element={ <Tkg/>} />
 
           <Route path="/tca" element={ <Tca/>} />
+
+          <Route path="/vcd" element={ <Vcd/>} />
 
           <Route path="/vrli" element={ <Vrli/>} />
 

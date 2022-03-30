@@ -8,8 +8,8 @@ import Password from '../components/Password';
 import { useDispatch } from 'react-redux';
 import { infraActions } from '../store/infra';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import {submitStyle,migration_options,pod_options,data_options,vsan_options,mainStyle,ipv4format } from '../store/constants';
+import {submitStyle,migration_options,pod_options,data_options,vsan_options,mainStyle } from '../store/constants';
+import {infra_schema} from '../store/schemas';
 
 var infra_map;
 var dispatch_infra = {}; 
@@ -28,38 +28,6 @@ const arrayMapper = (array_id,array_label) =>{
 }
 
 
-const infra_schema = yup.object({
-
-    infra_dns: yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}),
-    infra_ntp: yup.string().required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"}),
-    infra_domain: yup.string().required("This is a required field"),
-    infra_migration: yup.string(),
-    infra_mgmt_count: yup.number().default(0),
-    mgmt_host_user: yup.string().required("This is a required field"),
-    mgmt_host_password: yup.string().required("This is a required field"),
-    res_host_user: yup.string(),
-    res_host_password: yup.string(),
-    edge_host_user: yup.string(),
-    edge_host_password: yup.string(),
-    infra_allflash_vsan: yup.string(),
-    mgmt_datastore: yup.string(),
-    res_datastore: yup.string(),
-    edge_datastore: yup.string(),
-    pod_design: yup.string(),
-    infra_nfs_ip: yup.string().matches(ipv4format,{message : "Enter a valid IP address"}),
-    infra_nfs_mountpoint: yup.string(),
-    infra_nfs_name: yup.string(),
-    infra_res_count: yup.number().default(0),
-    infra_edge_count: yup.number().default(0),
-    mgmt_array: yup.array().of(yup.string("Enter a valid IP address").required("This is a required field" ).transform((value, originalValue) => value["value"]).matches(ipv4format,{message : "Enter a valid IP address"})),
-    res_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field" ).matches(ipv4format,{message : "Enter a valid IP address"})),
-    edge_array: yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
-    pxe_array:  yup.array().of(yup.string("Enter a valid IP address").transform((value, originalValue) => value["value"]).required("This is a required field").matches(ipv4format,{message : "Enter a valid IP address"})),
-    infra_pxe_count: yup.number().default(0),
-    pxe_username: yup.string(),
-    pxe_password:  yup.string(),
-
-  }).required();
 
 
 
