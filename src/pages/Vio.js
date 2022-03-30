@@ -73,16 +73,16 @@ const Vio= () =>{
         <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
                 <br/><br/>
             
-                <MyTextField label="VIO Ova Path " id="vio_binary_path"  />
-                <MyTextField label="VIO Domain name" id="vio_domain_name"  />
-                <MyTextField label="VIO VM name" id="vio_vm_name"  />
-                <MyTextField label="VIO Management Ip address" id="vio_mgmt_ip"  />
+                <MyTextField label="VIO Ova Path " id="vio_binary_path"  required />
+                <MyTextField label="VIO Domain name" id="vio_domain_name"  required />
+                <MyTextField label="VIO VM name" id="vio_vm_name" required  />
+                <MyTextField label="VIO Management Ip address" id="vio_mgmt_ip" required  />
                 <MyTextField label="VIO Management Start Ip address" id="vio_start_mgmt_ip"  />
                 <MyTextField label="VIO Management End Ip address" id="vio_end_mgmt_ip"  />
-                <MyTextField label="VIO Management Gateway Address" id="vio_gateway_addr"  />
-                <MyTextField label="VIO Management Subnet Mask" id="vio_subnet_mask" />
-                <MyTextField label="VIO Node Username" id="vio_username" />
-                <Password label="VIO User Password" id="vio_user_password" />
+                <MyTextField label="VIO Management Gateway Address" id="vio_gateway_addr"  required />
+                <MyTextField label="VIO Management Subnet Mask" id="vio_subnet_mask" required />
+                <MyTextField label="VIO Node Username" id="vio_username" required />
+                <Password label="VIO User Password" id="vio_user_password" required />
               
                 <input type="submit"  style={submitStyle} />
 

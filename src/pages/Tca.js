@@ -90,20 +90,20 @@ const Tca= () =>{
         <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
 
             <br/><br/>
-            <MyTextField label="TCA OVA Path" id="tca_mgr_binary_path"  />
-            <MyTextField label="TCA Manager Applicance Name" id="tca_mgr_appliance_name"  />
-            <MyTextField label="TCA Manager Host Name" id="tca_mgr_host_name"  />
+            <MyTextField label="TCA OVA Path" id="tca_mgr_binary_path" required />
+            <MyTextField label="TCA Manager Applicance Name" id="tca_mgr_appliance_name" required />
+            <MyTextField label="TCA Manager Host Name" id="tca_mgr_host_name" required />
             <MyDropdown  label="TCA Manager SSHenable" id="tca_mgr_ssh_enable"  options={tca_options} />
-            <MyTextField label="TCA Manager IPV4 Address" id="tca_mgr_ipv4_addr" />
-            <MyTextField label="TCA Manager IPV4 Gateway Address" id="tca_mgr_ipv4_gateway_addr" />
-            <MyTextField label="TCA Manager IPv4 Prefix" id="tca_mgr_ipv4_prefix" />
+            <MyTextField label="TCA Manager IPV4 Address" id="tca_mgr_ipv4_addr" required />
+            <MyTextField label="TCA Manager IPV4 Gateway Address" id="tca_mgr_ipv4_gateway_addr" required/>
+            <MyTextField label="TCA Manager IPv4 Prefix" id="tca_mgr_ipv4_prefix" required />
             <MyDropdown  label="TCA Manager IPv4 DHCP enable" id="tca_mgr_ipv4_dhcp_enable"  options={tca_options} />
             <MyTextField label="TCA Manager IPV6 Address" id="tca_mgr_ipv6_addr" />
             <MyTextField label="TCA Manager IPV6 Gateway Address" id="tca_mgr_ipv6_gateway_addr" />
             <MyTextField label="TCA Manager IPv6 Prefix" id="tca_mgr_ipv6_prefix" />
             <MyDropdown  label="TCA Manager IPv6 DHCP enable" id="tca_mgr_ipv6_dhcp_enable"  options={tca_options} />
-            <Password label="TCA Manager Root Password" id="tca_mgr_root_password" />
-            <Password label="TCA Manager CLI Password" id="tca_mgr_cli_password" />
+            <Password label="TCA Manager Root Password" id="tca_mgr_root_password" required/>
+            <Password label="TCA Manager CLI Password" id="tca_mgr_cli_password" required/>
 
             <MyTextField label="TCA Manager Static Address 01 " id="tca_mgr_static_addr_01" />
             <MyTextField label="TCA Manager Static Gateway Address 01" id="tca_mgr_static_gateway_addr_01" />

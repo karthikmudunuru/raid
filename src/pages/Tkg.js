@@ -55,11 +55,11 @@ const Tkg= () =>{
             <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
                 <br/><br/>
             
-                <MyTextField label="TKG Base Image OVF Path" id="tkg_binary_path"  />
-                <MyTextField label="TKG Base Image VM Template Name" id="tkg_template_name"  />
-                <MyTextField label="Photon OS 4 OVF Path" id="tkg_photon_os"  />
-                <MyTextField label="Airgap Server Applicance Name" id="airgap_appliance_name"  />
-                <MyTextField label="Airgap Server Host Name" id="airgap_host_name"  />
+                <MyTextField label="TKG Base Image OVF Path" id="tkg_binary_path" required />
+                <MyTextField label="TKG Base Image VM Template Name" id="tkg_template_name" required />
+                <MyTextField label="Photon OS 4 OVF Path" id="tkg_photon_os" required />
+                <MyTextField label="Airgap Server Applicance Name" id="airgap_appliance_name" required />
+                <MyTextField label="Airgap Server Host Name" id="airgap_host_name" required />
 
                 <input type="submit"  style={submitStyle} />
 

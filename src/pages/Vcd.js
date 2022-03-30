@@ -40,7 +40,19 @@ const Vcd= () =>{
        
     vcd_map = new Map(Object.entries(data));
         
-     
+    dispatch_vcd["vCDOVAPath"] = vcd_map.get("vcd_binary_path");
+    dispatch_vcd["VCDVMName"] = vcd_map.get("vcd_appliance_name");
+    dispatch_vcd["VCDVIP"] = vcd_map.get("vcd_ip_addr");
+    dispatch_vcd["VCDGateway"] = vcd_map.get("vcd_gateway_addr");
+    dispatch_vcd["VCDNetMask"] = vcd_map.get("vcd_subnet_mask");
+    dispatch_vcd["VCDVIPPrefix"] = vcd_map.get("vcd_prefix");
+    dispatch_vcd["vCDTRootPassword"] = vcd_map.get("vcd_root_password");
+    dispatch_vcd["VCDAdminUserName"] = vcd_map.get("vcd_admin_username");
+    dispatch_vcd["VCDAdminFullname"] = vcd_map.get("vcd_admin_fullname");
+    dispatch_vcd["VCDAdminPassword"] = vcd_map.get("vcd_admin_password");
+    dispatch_vcd["VCDAdminEmail"] = vcd_map.get("vcd_admin_email");
+    dispatch_vcd["VCDSysName"] = vcd_map.get("vcd_system_name");
+    dispatch_vcd["VCDInstallID"] = vcd_map.get("vcd_install_id");
        
         
       dispatch(infraActions.setConfig(dispatch_vcd))

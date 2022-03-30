@@ -70,6 +70,7 @@ return (
             <div>
               <TextField
                 {...field}
+                required
                 key={item.id}
                 label={item.l}
                 error={!!errors[array_name]?.[index]}

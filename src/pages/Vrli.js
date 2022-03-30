@@ -77,16 +77,16 @@ const Vrli= () =>{
         <FormProvider {...methods}>
         <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
                 <br/><br/>
-                <MyTextField label="Log Insight Ova Path " id="vrli_binary_path"  />
-                <MyTextField label="Log Insight Ip address" id="vrli_ip_addr"  />
-                <MyTextField label="Log Insight Virtual Ip address" id="vrli_vip_addr"  />
-                <MyTextField label="Log Insight Host name" id="vrli_host_name"  />
-                <MyTextField label="Log Insight Applicance Name" id="vrli_appliance_name"  />
-                <MyTextField label="Log Insight Virtual FQDN" id="vrli_virtual_fqdn"  />
-                <MyTextField label="Log Insight Gateway Address" id="vrli_gateway_addr"  />
-                <MyTextField label="Log Insight Subnet Mask" id="vrli_subnet_mask" />
-                <Password label="Log Insight Root Password" id="vrli_root_password" />
-                <MyTextField label="Log Insight User Name" id="vrli_username"  />
+                <MyTextField label="Log Insight Ova Path " id="vrli_binary_path"  required />
+                <MyTextField label="Log Insight Ip address" id="vrli_ip_addr"  required />
+                <MyTextField label="Log Insight Virtual Ip address" id="vrli_vip_addr" required  />
+                <MyTextField label="Log Insight Host name" id="vrli_host_name"  required />
+                <MyTextField label="Log Insight Applicance Name" id="vrli_appliance_name"   required />
+                <MyTextField label="Log Insight Virtual FQDN" id="vrli_virtual_fqdn"   required />
+                <MyTextField label="Log Insight Gateway Address" id="vrli_gateway_addr"  required />
+                <MyTextField label="Log Insight Subnet Mask" id="vrli_subnet_mask" required />
+                <Password label="Log Insight Root Password" id="vrli_root_password" required />
+                <MyTextField label="Log Insight User Name" id="vrli_username"  required />
                 <MyTextField label="Log Insight Email" id="vrli_email"  />
                 <MyTextField label="Log Insight Content Path Location" id="vrli_content_path" />
 

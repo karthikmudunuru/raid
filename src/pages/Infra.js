@@ -157,16 +157,16 @@ const Infra= () => {
    
      <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
         <br/><br/>
-        <MyTextField label="DNS Server" id="infra_dns"  />
-        <MyTextField  label="NTP Server" id="infra_ntp" />
-        <MyTextField label="Infra Domain" id="infra_domain"  />
+        <MyTextField label="DNS Server" id="infra_dns" required />
+        <MyTextField  label="NTP Server" id="infra_ntp" required />
+        <MyTextField label="Infra Domain" id="infra_domain"  required />
      
         <MyDropdown label="Migrate Esxi Mgmt Network from VSS to VDS" id="infra_migration" options={migration_options} />
         
         <NumberField  label= " Number of Management Hosts" id="infra_mgmt_count" />
         {showmgmt && <MyFieldArray count={parseInt(mgmt_count)}  label="Management Host Ip"   array_name="mgmt_array" />}
-        <MyTextField label="Management Host User" id="mgmt_host_user" />
-        <Password label="Management Host Password" id="mgmt_host_password" />
+        <MyTextField label="Management Host User" id="mgmt_host_user" required />
+        <Password label="Management Host Password" id="mgmt_host_password" required />
         
         <NumberField label= " Number of Resource Hosts" id="infra_res_count"  />
         {showres && <MyFieldArray count={parseInt(res_count)} label="Resource Host Ip"  array_name="res_array"/>}

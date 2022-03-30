@@ -177,19 +177,19 @@ const Vcenter= () =>{
         
         <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
             <br/><br/>
-            <MyTextField label="vCenter Binary Path" id="vc_binary_path"  />
-            <MyTextField label="Management vCenter Applicance Name" id="mgmt_vc_appliance_name"  />
-            <MyTextField label="Management vCenter Host Name" id="mgmt_vc_host_name"  />
-            <MyTextField label="Management vCenter IP Address" id="mgmt_vc_ip_addr" />
-            <MyTextField label="Management vCenter Gateway Address" id="mgmt_vc_gateway_addr" />
-            <MyTextField label="Management vCenter Subnet Mask" id="mgmt_vc_subnet_mask" />
-            <Password label="Management vCenter Root Password" id="mgmt_vc_root_password" />
-            <Password label="Management vCenter SSO Password" id="mgmt_vc_sso_password" />
-            <MyTextField label="Management vCenter SSO Domain" id="mgmt_vc_sso_domain"  />
-            <MyTextField label="Management vCenter User Name" id="mgmt_vc_username"  />
-            <MyTextField label="Management vCenter Deployment Network Switch" id="mgmt_vc_mgmt_switch"  />
-            <MyTextField label="Management vCenter Datacenter" id="mgmt_vc_datacenter"  />
-            <MyTextField label="Management vCenter Cluster" id="mgmt_vc_cluster"  />
+            <MyTextField label="vCenter Binary Path" id="vc_binary_path" required />
+            <MyTextField label="Management vCenter Applicance Name" id="mgmt_vc_appliance_name" required />
+            <MyTextField label="Management vCenter Host Name" id="mgmt_vc_host_name" required />
+            <MyTextField label="Management vCenter IP Address" id="mgmt_vc_ip_addr" required/>
+            <MyTextField label="Management vCenter Gateway Address" id="mgmt_vc_gateway_addr" required />
+            <MyTextField label="Management vCenter Subnet Mask" id="mgmt_vc_subnet_mask" required/>
+            <Password label="Management vCenter Root Password" id="mgmt_vc_root_password" required/>
+            <Password label="Management vCenter SSO Password" id="mgmt_vc_sso_password" required/>
+            <MyTextField label="Management vCenter SSO Domain" id="mgmt_vc_sso_domain" required />
+            <MyTextField label="Management vCenter User Name" id="mgmt_vc_username" required />
+            <MyTextField label="Management vCenter Deployment Network Switch" id="mgmt_vc_mgmt_switch"  required/>
+            <MyTextField label="Management vCenter Datacenter" id="mgmt_vc_datacenter"  required/>
+            <MyTextField label="Management vCenter Cluster" id="mgmt_vc_cluster"  required/>
             <MyTextField label="Management vCenter vSAN Datastore " id="mgmt_vc_vsan_name"  />
             <MyTextField label="Management vCenter Infra VDS Name" id="mgmt_vc_infra_vds"  />
             <MyTextField label="Management vCenter Tenant VDS Name" id="mgmt_vc_tenant_vds"  />
@@ -213,18 +213,18 @@ const Vcenter= () =>{
 
                 
 
-            <MyTextField label="Resource vCenter Applicance Name" id="res_vc_appliance_name"  />
-            <MyTextField label="Resource vCenter Host Name" id="res_vc_host_name"  />
-            <MyTextField label="Resource vCenter IP Address" id="res_vc_ip_addr" />
-            <MyTextField label="Resource vCenter Gateway Address" id="res_vc_gateway_addr" />
-            <MyTextField label="Resource vCenter Subnet Mask" id="res_vc_subnet_mask" />
-            <Password label="Resource vCenter Root Password" id="res_vc_root_password" />
-            <Password label="Resource vCenter SSO Password" id="res_vc_sso_password" />
-            <MyTextField label="Resource vCenter SSO Domain" id="res_vc_sso_domain"  />
-            <MyTextField label="Resource vCenter User Name" id="res_vc_username"  />
-            <MyTextField label="Resource vCenter Deployment Network Switch" id="res_vc_mgmt_switch"  />
-            <MyTextField label="Resource vCenter Datacenter" id="res_vc_datacenter"  />
-            <MyTextField label="Resource vCenter Cluster" id="res_vc_cluster"  />
+            <MyTextField label="Resource vCenter Applicance Name" id="res_vc_appliance_name" required />
+            <MyTextField label="Resource vCenter Host Name" id="res_vc_host_name" required />
+            <MyTextField label="Resource vCenter IP Address" id="res_vc_ip_addr" required/>
+            <MyTextField label="Resource vCenter Gateway Address" id="res_vc_gateway_addr" required />
+            <MyTextField label="Resource vCenter Subnet Mask" id="res_vc_subnet_mask" required />
+            <Password label="Resource vCenter Root Password" id="res_vc_root_password" required/>
+            <Password label="Resource vCenter SSO Password" id="res_vc_sso_password" required/>
+            <MyTextField label="Resource vCenter SSO Domain" id="res_vc_sso_domain"  required/>
+            <MyTextField label="Resource vCenter User Name" id="res_vc_username"  required/>
+            <MyTextField label="Resource vCenter Deployment Network Switch" id="res_vc_mgmt_switch" required  />
+            <MyTextField label="Resource vCenter Datacenter" id="res_vc_datacenter" required />
+            <MyTextField label="Resource vCenter Cluster" id="res_vc_cluster" required />
             <MyTextField label="Resource vCenter vSAN Datastore " id="res_vc_vsan_name"  />
             <MyTextField label="Resource vCenter Infra VDS Name" id="res_vc_infra_vds"  />
             <MyTextField label="Resource vCenter Tenant VDS Name" id="res_vc_tenant_vds"  />

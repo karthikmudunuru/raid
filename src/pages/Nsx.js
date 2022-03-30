@@ -135,19 +135,19 @@ const Nsx= () =>{
         <form style={mainStyle} onSubmit={methods.handleSubmit(onSubmit)}>
             <br/><br/>
        
-            <MyTextField label="NSX Manager Binary Path" id="nsx_mgr_binary_path"  />
-            <MyTextField label="NSX Manager Applicance Name" id="nsx_mgr_appliance_name"  />
-            <MyTextField label="NSX Manager Host Name" id="nsx_mgr_host_name"  />
-            <MyTextField label="NSX Manager IP Address" id="nsx_mgr_ip_addr" />
-            <MyTextField label="NSX Manager Gateway Address" id="nsx_mgr_gateway_addr" />
-            <MyTextField label="NSX Manager Subnet Mask" id="nsx_mgr_subnet_mask" />
-            <MyTextField label="NSX Manager Network Prefix" id="nsx_mgr_prefix"  />
-            <Password label="NSX Manager Root Password" id="nsx_mgr_root_password" />
-            <Password label="NSX Manager CLI Password" id="nsx_mgr_cli_password" />
-            <Password label="NSX Manager Admin Password" id="nsx_mgr_admin_password" />
+            <MyTextField label="NSX Manager Binary Path" id="nsx_mgr_binary_path" required />
+            <MyTextField label="NSX Manager Applicance Name" id="nsx_mgr_appliance_name" required />
+            <MyTextField label="NSX Manager Host Name" id="nsx_mgr_host_name" required />
+            <MyTextField label="NSX Manager IP Address" id="nsx_mgr_ip_addr" required/>
+            <MyTextField label="NSX Manager Gateway Address" id="nsx_mgr_gateway_addr"required />
+            <MyTextField label="NSX Manager Subnet Mask" id="nsx_mgr_subnet_mask" required/>
+            <MyTextField label="NSX Manager Network Prefix" id="nsx_mgr_prefix" required />
+            <Password label="NSX Manager Root Password" id="nsx_mgr_root_password" required/>
+            <Password label="NSX Manager CLI Password" id="nsx_mgr_cli_password" required/>
+            <Password label="NSX Manager Admin Password" id="nsx_mgr_admin_password" required/>
             <Password label="NSX Manager Audit Password" id="nsx_mgr_audit_password" />
 
-            <MyTextField label="NSX Manager Admin Username" id="nsx_mgr_admin_name"  />
+            <MyTextField label="NSX Manager Admin Username" id="nsx_mgr_admin_name" required />
             <MyTextField label="NSX Manager Audit Username" id="nsx_mgr_audit_name"  />
             <MyDropdown  label="NSX Manager Network Type " id="nsx_mgr_nw_type"  options={network_options} />
             <MyDropdown  label="NSX Manager Deployment Form" id="nsx_mgr_form_size"  options={deployment_options} />
@@ -161,8 +161,8 @@ const Nsx= () =>{
             <Password label="NSX-T Edge Root Password" id="nsx_edge_root_password" />
             <Password label="NSX-T Edge CLI Password" id="nsx_edge_cli_password" />
             
-            <MyTextField label="NSX-T IP Pool Start Address" id="nsx_pool_start" />
-            <MyTextField label="NSX-T IP Pool End Address" id="nsx_pool_end" />
+            <MyTextField label="NSX-T IP Pool Start Address" id="nsx_pool_start" required/>
+            <MyTextField label="NSX-T IP Pool End Address" id="nsx_pool_end" required />
             <MyTextField label="NSX-T IP Pool CIDR" id="nsx_pool_cidr"  />
 
             <MyTextField label="NSX-T Overlay Transport Zone Name" id="nsx_overlay_tz_name"  />
